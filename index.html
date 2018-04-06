@@ -25,12 +25,15 @@
       <div class="row">
         <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
           <div class="page-title">Nyv's Workshop</div>
+          <div class="page-subtitle">A simple interface intended to help Neverwinter players determine which raw materials need to be farmed, crafted, or purchased in order to commission a masterwork crafter to create some of Faerun's most sought-after equipment.</div>
           <div class="white-box" id="item-select-wrap">
             <h1>Select an item:</h1>
             <p>Once you have made a selection, the display will update to reflect the required raw/crafted materials.</p>
-            <select class="form-control" id="item-select-dd">
-              <option v-for="craftable in craftables">{{ craftable.name }}</option>
-            </select>
+            <div class="craftable-items row">
+              <div class="col-md-2 col-xs-4" v-for="craftable in craftables">
+                <div class="craftable-item vert-flex"><div class="craftable-item-name">{{ craftable.name }}</div></div>
+              </div>
+            </div>
           </div>
           <div id="reagents-wrap">
             <div class="reagents-list">
