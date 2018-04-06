@@ -44,7 +44,7 @@
           </div>
           <div class="white-box" id="item-select-wrap">
             <h1>Select an item:</h1>
-            <p>Once you have made a selection, the display will update to reflect the required raw/crafted materials.</p>
+            <p>Once you have made a selection, the display will update to reflect the required raw/crafted materials.  More items will be added as I unlock more MW5 recipes. :)</p>
             <div class="craftable-items row">
               <craftable-item v-for="craftable in craftables" :key="craftable.name" :item="craftable"></craftable-item>
             </div>
@@ -60,6 +60,9 @@
               </div>
               <material v-for="m in materials" :key="m.name" :mat="m"></material>
             </div>
+          </div>
+          <div class="footer">
+            Built by Nyvaril from <a href="http://civil-anarchy.gamerlaunch.com/">Civil Anarchy</a>
           </div>
         </div>
       </div>
