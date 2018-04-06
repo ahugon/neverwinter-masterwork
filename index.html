@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Hey, what are you doing in here!  No snooping! -->
+    <title>Nyv's Workshop | Visualize raw materials needed for masterwork commissions</title>
+
+    <!-- external -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue"></script>
+
+    <!-- internal -->
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <script src="js/main.js"></script>
+
+    <!-- meta... aka 2 DC, 1 OP, 1 GF/SW, 1 GWF -->
+    <meta name="title" content="Nyv's Workshop" />
+    <meta name="description" content="Visualize which materials you need to farm for a crafter to create various popular Masterwork items in Neverwinter." />
+    <meta name="keywords" content="neverwinter, neverwinter masterwork, neverwinter masterwork crafting, neverwork masterwork ingredients, neverwinter masterwork farming">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
+          <div class="page-title">Nyv's Workshop</div>
+          <div class="white-box" id="item-select-wrap">
+            <h1>Select an item:</h1>
+            <p>Once you have made a selection, the display will update to reflect the required raw/crafted materials.</p>
+            <select class="form-control" id="item-select-dd">
+              <option v-for="craftable in craftables">{{ craftable.name }}</option>
+            </select>
+          </div>
+          <div id="reagents-wrap">
+            <div class="reagents-list">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
