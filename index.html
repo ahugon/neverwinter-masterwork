@@ -30,9 +30,7 @@
             <h1>Select an item:</h1>
             <p>Once you have made a selection, the display will update to reflect the required raw/crafted materials.</p>
             <div class="craftable-items row">
-              <div class="col-md-2 col-xs-4" v-for="craftable in craftables">
-                <div class="craftable-item vert-flex"><div class="craftable-item-name">{{ craftable.name }}</div></div>
-              </div>
+              <craftable-item v-for="craftable in craftables" :key="craftable.name" :item="craftable"></craftable-item>
             </div>
           </div>
           <div id="reagents-wrap">

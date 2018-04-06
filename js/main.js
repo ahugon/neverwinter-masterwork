@@ -266,27 +266,31 @@ function initializePage() {
   CRAFTABLE_ITEMS.push(fangedBeadedAmulet.vueObject());
 }
 
-function selectItem() {
-  
-}
-
-function clearSelectedItem() {
-  
-}
-
-function fetchDirectIngredients(itemName) {
-  
-}
-
 window.onload = function() {
   initializePage();
+
+  Vue.component('craftable-item', {
+    props: ['item'], 
+    methods: {
+      itemClicked: function(it) {
+        console.log("itemClicked with " + JSON.stringify(it));
+      }
+    }, 
+    template: `
+      <div class="col-md-2 col-xs-4">
+        <div class="craftable-item vert-flex" v-on:click="itemClicked(item)">
+          <div class="craftable-item-name">{{ item.name }}</div>
+        </div>
+      </div>
+    `
+  });
+
   // Vue app
   var selectItemApp = new Vue({
     el: '#item-select-wrap', 
     data: {
       craftables: CRAFTABLE_ITEMS
     }
-  })
+  });
+
 }
-
-
