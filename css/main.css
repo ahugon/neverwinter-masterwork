@@ -48,6 +48,7 @@ div.page-subtitle {
 
 div.white-box {
   padding: 2.5rem;
+  margin-bottom: 5rem;
   border-radius: 0.33rem;
   border: 1px solid #DDDDDD;
   border-left: 0.5rem solid #663399;
@@ -62,7 +63,7 @@ div.white-box h1 {
 }
 
 div.white-box p {
-  font-size: 16px;
+  font-size: 1.33rem;
   font-weight: 400;
   margin-bottom: 1.5rem;
 }
@@ -90,4 +91,88 @@ div.craftable-items div.craftable-item {
 div.craftable-items div.craftable-item:hover {
   border-bottom: 0.33rem solid #663399;
   top: 0px;
+}
+
+div.raw-material {
+  padding: 1rem 1.5rem;
+  border-left: 0.33rem solid #339900;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+div.raw-material div.raw-material-name {
+  font-size: 1.33rem;
+  font-weight: 700;
+  color: #339900;
+}
+
+div.raw-material div.raw-material-source {
+  
+}
+
+div.raw-material div.raw-material-cost {
+  
+}
+
+div.crafted-material {
+  padding: 1rem 1.5rem;
+  border-left: 0.33rem solid #CC0066;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+div.crafted-material div.crafted-material-name {
+  font-size: 1.33rem;
+  color: #CC0066;
+  font-weight: 700;
+}
+
+div.crafted-material div.crafted-material-profession {
+  
+}
+
+div.crafted-material div.crafted-material-expand {
+  margin-top: 0.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.167rem;
+}
+
+div.crafted-material div.crafted-material-reqs {
+  margin-top: 1rem;
+}
+
+div.crafted-material div.crafted-material-reqs div.crafted-material-req {
+
+}
+
+div.raw-material span, div.crafted-material span {
+  font-weight: 700;
+}
+
+div.key-circle {
+  font-weight: 700;
+  font-size: 1.25rem;
+  padding-left: 2.25rem;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+div.key-circle:after {
+  position: absolute;
+  content: '';
+  top: 0px;
+  left: 0px;
+
+  border-radius: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+div.key-circle.raw:after {
+  background-color: #339900;
+}
+
+div.key-circle.crafted:after {
+  background-color: #CC0066;
 }

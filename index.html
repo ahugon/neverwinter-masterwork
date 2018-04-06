@@ -32,10 +32,17 @@
             <div class="craftable-items row">
               <craftable-item v-for="craftable in craftables" :key="craftable.name" :item="craftable"></craftable-item>
             </div>
-          </div>
-          <div id="reagents-wrap">
-            <div class="reagents-list">
-
+            <div id="material-list" v-show="materials.length > 0">
+              <h1>Required materials:</h1>
+              <div class="row">
+                <div class="col-md-2 col-sm-3 col-xs-6">
+                  <div class="key-circle crafted">Crafted</div>
+                </div>
+                <div class="col-md-2 col-sm-3 col-xs-6">
+                  <div class="key-circle raw">Raw</div>
+                </div>
+              </div>
+              <material v-for="m in materials" :key="m.name" :mat="m"></material>
             </div>
           </div>
         </div>
