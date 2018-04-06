@@ -329,7 +329,16 @@ window.onload = function() {
     props: ['item'], 
     methods: {
       itemClicked: function(it) {
-        console.log("it was " + it.name);
+        var thisItem = this;
+        var el = thisItem.$el;
+        var thisCraftableItemDiv = el.children[0];
+        var craftableItemDivs = document.querySelectorAll('.craftable-item');
+
+        for(var j = 0; j < craftableItemDivs.length; j++) {
+          craftableItemDivs[j].classList.remove("selected");
+        }
+        thisCraftableItemDiv.classList.add("selected");
+
         MATERIALS.splice(0, MATERIALS.length);
         selectItemApp.selectedItem = it.name;
 
