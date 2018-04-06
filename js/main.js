@@ -329,7 +329,9 @@ window.onload = function() {
     props: ['item'], 
     methods: {
       itemClicked: function(it) {
+        console.log("it was " + it.name);
         MATERIALS.splice(0, MATERIALS.length);
+        selectItemApp.selectedItem = it.name;
 
         for(var i = 0; i < it.reqs.length; i++) {
           var req = it.reqs[i];
@@ -378,7 +380,8 @@ window.onload = function() {
     el: '#item-select-wrap', 
     data: {
       craftables: CRAFTABLE_ITEMS, 
-      materials: MATERIALS
+      materials: MATERIALS, 
+      selectedItem: ""
     }
   });
 

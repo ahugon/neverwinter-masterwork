@@ -93,6 +93,12 @@ div.craftable-items div.craftable-item:hover {
   top: 0px;
 }
 
+div#material-list {
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border-top: 0.33rem dashed #DDDDDD;
+}
+
 div.raw-material {
   padding: 1rem 1.5rem;
   border-left: 0.33rem solid #339900;

@@ -33,7 +33,7 @@
               <craftable-item v-for="craftable in craftables" :key="craftable.name" :item="craftable"></craftable-item>
             </div>
             <div id="material-list" v-show="materials.length > 0">
-              <h1>Required materials:</h1>
+              <h1>{{ selectedItem }} materials:</h1>
               <div class="row">
                 <div class="col-md-2 col-sm-3 col-xs-6">
                   <div class="key-circle crafted">Crafted</div>
