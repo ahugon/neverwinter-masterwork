@@ -125,6 +125,7 @@ div.raw-material {
   border-left: 0.33rem solid #339900;
   margin-bottom: 1rem;
   font-size: 1.25rem;
+  position: relative;
 }
 
 div.raw-material div.raw-material-name {
@@ -146,6 +147,7 @@ div.crafted-material {
   border-left: 0.33rem solid #CC0066;
   margin-bottom: 1rem;
   font-size: 1.25rem;
+  position: relative;
 }
 
 div.crafted-material div.crafted-material-name {
@@ -175,6 +177,32 @@ div.crafted-material div.crafted-material-reqs div.crafted-material-req {
 
 div.raw-material span, div.crafted-material span {
   font-weight: 700;
+}
+
+div.crafted-material div.raw-material, div.crafted-material div.crafted-material {
+  margin-left: 1rem;
+}
+
+div.crafted-material div.raw-material:after {
+  content: '';
+  position: absolute;
+  width: 2.5rem;
+  padding: 0px;
+  left: -2.83rem;
+  top: 50%;
+  height: 0px;
+  border-top: 4px solid #339900;
+}
+
+div.crafted-material div.crafted-material:after {
+  content: '';
+  position: absolute;
+  width: 2.5rem;
+  padding: 0px;
+  left: -2.83rem;
+  top: 50%;
+  height: 0px;
+  border-top: 4px solid #CC0066;
 }
 
 div.key-circle {
