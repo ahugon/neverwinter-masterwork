@@ -367,7 +367,7 @@ var fangedBeadedAmulet = new CraftedItem("Fanged Beaded Amulet", jewelcrafting, 
     { item: fangedOrnament, amount: 2 }, 
     { item: lakhVarnish, amount: 1 }
   ]);
-var lichstoneAmulet = new CraftedItem("LichstoneAmulet", jewelcrafting, [
+var lichstoneAmulet = new CraftedItem("Lichstone Amulet", jewelcrafting, [
     { stat: AC, amount: 2 }, 
     { stat: RECOVERY, amount: 398 }, 
     { stat: DEFENSE, amount: 380 }, 
