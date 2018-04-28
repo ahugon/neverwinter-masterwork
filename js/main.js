@@ -88,6 +88,10 @@ var CRIT = "Critical Strike";
 var ARPEN = "Armor Penetration";
 var RECOVERY = "Recovery";
 var APGAIN = "Action Point Gain";
+var DEFLECT = "Deflection";
+var DEFENSE = "Defense";
+var HP = "Maximum Hit Points";
+var AC = "AC";
 
 // declare professions
 var tailoring = new Profession("Tailoring");
@@ -102,6 +106,7 @@ var leatherworking = new Profession("Leatherworking");
 // declare zones
 var soshenstar = new Zone("Chult: Soshenstar River");
 var omu = new Zone("Chult: Lost City of Omu");
+var chult = new Zone("Chult: Soshenstar & Omu");
 var stronghold = new Zone("Guild Stronghold");
 var dungeon = new Zone("Dungeon");
 var pe = new Zone("Protector's Enclave");
@@ -121,10 +126,12 @@ var soshenstarMap = new Origin("Untapped Resources", soshenstar, MAPS);
 var omuMap = new Origin("Untapped Resources", omu, MAPS);
 var atelier = new Origin("Atelier", stronghold, GMS);
 var goldsmith = new Origin("Goldsmith", stronghold, GMS);
+var tenterground = new Origin("Tenterground", stronghold, GMS);
 var tong = new Origin("Tomb of the Nine Gods", dungeon, DROP);
 var msp = new Origin("Spellplague Caverns (Master)", dungeon, DROP);
 var allosaurs = new Origin("Allosaurs", soshenstar, DROP);
 var batiri = new Origin("Batiri", soshenstar, DROP);
+var spiders = new Origin("Spiders", chult, DROP);
 
 // declare trash mats
 var greenVitriol = new RawMaterial("Green Vitriol x 10", atelier, 1, RAW);
@@ -140,25 +147,34 @@ var salAmmoniac = new RawMaterial("Sal Ammoniac", hotenowMap, 1, RAW);
 // declare raw mats from SKT 3k maps
 var rawSphene = new RawMaterial("Raw Sphene", brynShanderMap, 1, RAW);
 var rawRubellite = new RawMaterial("Raw Rubellite", coldRunMap, 1, RAW);
+var effervescentWater = new RawMaterial("Effervescent Water", coldRunMap, 1, RAW);
 
 // declare raw mats from Chult 3k maps
-var samarachanJute = new RawMaterial("Samarachan Jute", omuMap, 1, RAW);
 var lakhResin = new RawMaterial("Lakh Resin", soshenstarMap, 1, RAW);
 var bronzewoodLog = new RawMaterial("Bronzewood Log", soshenstarMap, 1, RAW);
-var brilliantPinion = new RawMaterial("Brilliant Pinion", omuMap, 1, RAW);
 var chultanTeaLeaves = new RawMaterial("Chultan Tea Leaves", soshenstarMap, 1, RAW);
+var silkwormCocoon = new RawMaterial("Silkworm Cocoon", soshenstarMap, 1, RAW);
+var samarachanJute = new RawMaterial("Samarachan Jute", omuMap, 1, RAW);
+var brilliantPinion = new RawMaterial("Brilliant Pinion", omuMap, 1, RAW);
+var obsidian = new RawMaterial("Obsidian", omuMap, 1, RAW);
+var chultanSpringWater = new RawMaterial("Chultan Spring Water", omuMap, 1, RAW);
 
 // declare raw mats from GM vendors
 var tincal = new RawMaterial("Tincal", atelier, 2000, RAW);
 var alkali = new RawMaterial("Alkali", atelier, 2000, RAW);
 var redRouge = new RawMaterial("Red Rouge", goldsmith, 2000, RAW);
+var potash = new RawMaterial("Potash", tenterground, 2000, RAW);
 var terebinth = new RawMaterial("Terebinth", atelier, 400, RAW);
+
 
 // declare drops
 var tearOfUbtao = new RawMaterial("Tear of Ubtao", tong, 0, RAW);
 var allosaurFang = new RawMaterial("Allosaur Fang", allosaurs, 0, RAW);
 var batiriPrism = new RawMaterial("Batiri Prism", batiri, 0, RAW);
+var spiderSilk = new RawMaterial("Spider Silk", spiders, 0, RAW);
 var fartouchedResiduum = new RawMaterial("Fartouched Residuum", msp, 0, RAW);
+var moteOfSoulfire = new RawMaterial("Mote of Soulfire", tong, 0, RAW);
+var lichstone = new RawMaterial("Lichstone", tong, 0, RAW);
 
 // declare crafted mats (mw1-4)
 // mw1-3: 
@@ -212,6 +228,11 @@ var bronzewoodLumber = new CraftedMaterial("Bronzewood Lumber", artificing, 1, 4
   { item: tincal, amount: 1 }
 ], CRAFTED);
 
+var hardenedBronzewood = new CraftedMaterial("Hardened Bronzewood", mailsmithing, 0, 2, [
+  { item: bronzewoodLumber, amount: 4 }, 
+  { item: lakhVarnish, amount: 1 }
+], CRAFTED);
+
 var livingBronzewood = new CraftedMaterial("Living Bronzewood", artificing, 1, 3, [
   { item: bronzewoodLumber, amount: 4 }, 
   { item: tearOfUbtao, amount: 1 }
@@ -233,6 +254,17 @@ var brilliantBead = new CraftedMaterial("Brilliant Bead", jewelcrafting, 1, 4, [
   { item: redRouge, amount: 1 }
 ], CRAFTED);
 
+var chultanSilkThread = new CraftedMaterial("Chultan Silk Thread", tailoring, 0, 4, [
+  { item: silkwormCocoon, amount: 12 }, 
+  { item: effervescentWater, amount: 6 }
+], CRAFTED);
+
+var chultanSilk = new CraftedMaterial("Chultan Silk", tailoring, 0, 2, [
+  { item: chultanSilkThread, amount: 4 }, 
+  { item: potash, amount: 1 }, 
+  { item: spiderSilk, amount: 4 }
+], CRAFTED);
+
 var juteMacrame = new CraftedMaterial("Jute Macrame", tailoring, 1, 3, [
   { item: samarachanJute, amount: 15 }, 
 ], CRAFTED);
@@ -249,7 +281,24 @@ var featheredOrnament = new CraftedMaterial("Feathered Ornament", jewelcrafting,
   { item: brilliantBead, amount: 4 }
 ], CRAFTED);
 
+var obsidianShard = new CraftedMaterial("Obsidian Shard", weaponsmithing, 1, 4, [
+  { item: obsidian, amount: 12 }, 
+  { redRouge, amount: 1 }
+], CRAFTED);
+
+var soulfiredObsidian = new CraftedMaterial("Soulfired Obsidian", weaponsmithing, 1, 3, [
+  { item: obsidianShard, amount: 4 }, 
+  { item: moteOfSoulfire, amount: 1 }
+], CRAFTED);
+
+var lichstoneEnamel = new CraftedMaterial("Lichstone Enamel", artificing, 1, 3, [
+  { item: lichstone, amount: 1 }, 
+  { item: artisansEnamel, amount: 4 }
+], CRAFTED);
+
+
 // declare crafted items (mw5)
+/* rings */
 var bronzewoodRaidRing = new CraftedItem("Bronzewood Raid Ring", jewelcrafting, [
     { stat: POWER, amount: 543 }, 
     { stat: CRIT, amount: 814 }
@@ -275,6 +324,16 @@ var beadedRestorationRing = new CraftedItem("Beaded Restoration Ring", jewelcraf
     { item: chultanTeaLeaves, amount: 2 }, 
     { item: lakhVarnish, amount: 1 }
   ]);
+var lichstoneWardRing = new CraftedItem("Lichstone Ward Ring", jewelcrafting, [
+    { stat: DEFLECT, amount: 543 }, 
+    { stat: HP, amount: 3256 }
+  ], [
+    { item: lichstoneEnamel, amount: 1 }, 
+    { item: bronzewoodLumber, amount: 4 }, 
+    { item: lakhVarnish, amount: 1 }
+  ]);
+
+/* necklaces */
 var beadedAmulet = new CraftedItem("Beaded Amulet", jewelcrafting, [
     { stat: POWER, amount: 380 }, 
     { stat: CRIT, amount: 398 }, 
@@ -308,18 +367,98 @@ var fangedBeadedAmulet = new CraftedItem("Fanged Beaded Amulet", jewelcrafting, 
     { item: fangedOrnament, amount: 2 }, 
     { item: lakhVarnish, amount: 1 }
   ]);
+var lichstoneAmulet = new CraftedItem("LichstoneAmulet", jewelcrafting, [
+    { stat: AC, amount: 2 }, 
+    { stat: RECOVERY, amount: 398 }, 
+    { stat: DEFENSE, amount: 380 }, 
+    { stat: DEFLECT, amount: 380 }
+  ], [
+    { item: lichstoneEnamel, amount: 1 }, 
+    { item: obsidianShard, amount: 2 }, 
+    { item: brilliantBead, amount: 4 }, 
+    { item: lakhVarnish, amount: 1 }
+  ]);
+
+/* weapons */
+var obsidianMiztonhiyo = new CraftedItem("Obsidian Miztonhiyo (CW main)", artificing, [], [
+    { item: livingBronzewood, amount: 3 }, 
+    { item: juteMacrame, amount: 4 }, 
+    { item: featheredOrnament, amount: 2 }, 
+    { item: obsidianShard, amount: 1 }, 
+    { item: lakhVarnish, amount: 1 }
+  ]);
+var fangedQuiilpia = new CraftedItem("Fanged Quiilpia (CW off)", artificing, [], [
+    { item: livingBronzewood, amount: 3 }, 
+    { item: brilliantBead, amount: 4 }, 
+    { item: fangedOrnament, amount: 2 }, 
+    { item: chultanSilkThread, amount: 1 }
+  ]);
+var featheredTeotlanextli = new CraftedItem("Feathered Teotlanextli (DC main)", artificing, [], [
+    { item: livingBronzewood, amount: 3 }, 
+    { item: juteMacrame, amount: 4 }, 
+    { item: featheredOrnament, amount: 2 }, 
+    { item: obsidianShard, amount: 1 }, 
+    { item: lakhVarnish, amount: 1 }
+  ]);
+var featheredIlhuilli = new CraftedItem("Feathered Ilhuilli (DC off)", artificing, [], [
+    { item: soulfiredObsidian, amount: 3 }, 
+    { item: hardenedBronzewood, amount: 4 }, 
+    { item: fangedOrnament, amount: 2 }, 
+    { item: lakhVarnish, amount: 1 }
+  ]);
+
+/* belts */
+var beadedSash = new CraftedItem("Beaded Sash", tailoring, [], [
+    { item: soulfiredObsidian, amount: 1 }, 
+    { item: brilliantBead, amount: 2 }, 
+    { item: chultanSilk, amount: 4 }, 
+    { item: juteMacrame, amount: 1 }
+  ]);
+var bronzewoodSash = new CraftedItem("Bronzewood Sash", tailoring, [], [
+    { item: livingBronzewood, amount: 1 }, 
+    { item: brilliantBead, amount: 2 }, 
+    { item: chultanSilk, amount: 4 }, 
+    { item: juteMacrame, amount: 1 }
+  ]);
+var fangedSash = new CraftedItem("Fanged Sash", tailoring, [], [
+    { item: soulfiredObsidian, amount: 1 }, 
+    { item: fangedOrnament, amount: 2 }, 
+    { item: chultanSilk, amount: 4 }, 
+    { item: juteMacrame, amount: 1 }
+  ]);
+var lichstoneSash = new CraftedItem("Lichstone Sash", tailoring, [], [
+    { item: lichstoneEnamel, amount: 1 }, 
+    { item: obsidianShard, amount: 2 }, 
+    { item: chultanSilk, amount: 4 }, 
+    { item: juteMacrame, amount: 1 }
+  ]);
+
 
 var CRAFTABLE_ITEMS = [];
 var MATERIALS = [];
 
 function initializePage() {
   CRAFTABLE_ITEMS = [];
+
   CRAFTABLE_ITEMS.push(bronzewoodRaidRing.vueObject());
   CRAFTABLE_ITEMS.push(beadedAssaultRing.vueObject());
   CRAFTABLE_ITEMS.push(beadedRestorationRing.vueObject());
+  CRAFTABLE_ITEMS.push(lichstoneWardRing.vueObject());
+
   CRAFTABLE_ITEMS.push(beadedAmulet.vueObject());
   CRAFTABLE_ITEMS.push(bronzewoodAmulet.vueObject());
   CRAFTABLE_ITEMS.push(fangedBeadedAmulet.vueObject());
+  CRAFTABLE_ITEMS.push(lichstoneAmulet.vueObject());
+
+  CRAFTABLE_ITEMS.push(beadedSash.vueObject());
+  CRAFTABLE_ITEMS.push(bronzewoodSash.vueObject());
+  CRAFTABLE_ITEMS.push(fangedSash.vueObject());
+  CRAFTABLE_ITEMS.push(lichstoneSash.vueObject());
+
+  CRAFTABLE_ITEMS.push(obsidianMiztonhiyo.vueObject());
+  CRAFTABLE_ITEMS.push(fangedQuiilpia.vueObject());
+  CRAFTABLE_ITEMS.push(featheredTeotlanextli.vueObject());
+  CRAFTABLE_ITEMS.push(featheredIlhuilli.vueObject());
 }
 
 window.onload = function() {
@@ -350,7 +489,7 @@ window.onload = function() {
       }
     }, 
     template: `
-      <div class="col-md-2 col-xs-4">
+      <div class="col-md-3 col-sm-3 col-xs-3">
         <div class="craftable-item vert-flex" @click="itemClicked(item)">
           <div class="craftable-item-name">{{ item.name }}</div>
         </div>
