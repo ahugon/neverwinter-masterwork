@@ -134,7 +134,7 @@ var batiri = new Origin("Batiri", soshenstar, DROP);
 var spiders = new Origin("Spiders", chult, DROP);
 
 // declare trash mats
-var greenVitriol = new RawMaterial("Green Vitriol x 10", atelier, 1, RAW);
+var greenVitriol = new RawMaterial("Green Vitriol", atelier, 0.1, RAW);
 var sharkOil = new RawMaterial("Shark Oil", mwVendor, 250, RAW);
 var rockSalt = new RawMaterial("Rock Salt", profVendor, 30, RAW);
 
