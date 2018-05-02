@@ -436,6 +436,7 @@ var lichstoneSash = new CraftedItem("Lichstone Sash", tailoring, [], [
 
 var CRAFTABLE_ITEMS = [];
 var MATERIALS = [];
+var TOTALS_BY_MATERIAL = [];
 
 function initializePage() {
   CRAFTABLE_ITEMS = [];
@@ -478,7 +479,10 @@ window.onload = function() {
         }
         thisCraftableItemDiv.classList.add("selected");
 
+        // empty the state arrays
         MATERIALS.splice(0, MATERIALS.length);
+        TOTALS_BY_MATERIAL.splice(0, TOTALS_BY_MATERIAL.length);
+
         selectItemApp.selectedItem = it.name;
 
         for(var i = 0; i < it.reqs.length; i++) {
@@ -503,7 +507,28 @@ window.onload = function() {
       return {
         expanded: false
       }
-    },
+    }, 
+    mounted: function() {
+      var thisMat = this.mat;
+      var thisMatItem = thisMat.item;
+      var thisMatItemName = thisMatItem.name;
+      var found = false;
+
+      if(thisMatItem.mtype == 'raw') {
+        for(var i = 0; i < TOTALS_BY_MATERIAL.length; i++) {
+          var thisTotal = TOTALS_BY_MATERIAL[i];
+          if(thisTotal.name == thisMatItemName) {
+            thisTotal.count += thisMat.amount;
+            console.log("added " + thisMat.amount + " to total for " + thisMatItemName + ", now " + thisTotal.count);
+            found = true;
+          }
+        }
+        if(!found) {
+          TOTALS_BY_MATERIAL.push({ name: thisMatItemName, count: thisMat.amount });
+          console.log("added initial " + thisMat.amount + " " + thisMatItemName);
+        }
+      }
+    }, 
     template: `
       <div class="raw-material" v-if="mat.item.mtype == 'raw'">
         <div class="raw-material-name">{{ mat.item.name }} &times; {{ mat.amount }}</div>
@@ -523,12 +548,24 @@ window.onload = function() {
     `
   });
 
+  Vue.component('total', {
+    props: ['t'], 
+    template: `
+      <div class="col-md-3 col-sm-3 col-xs-3">
+        <div class="raw-material">
+          <div class="raw-material-name">{{ t.name }} &times; {{ t.count }}</div>
+        </div>
+      </div>
+    `
+  });
+
   // Vue app
   var selectItemApp = new Vue({
     el: '#item-select-wrap', 
     data: {
       craftables: CRAFTABLE_ITEMS, 
       materials: MATERIALS, 
+      totals: TOTALS_BY_MATERIAL, 
       selectedItem: ""
     }
   });
