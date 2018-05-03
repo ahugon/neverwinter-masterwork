@@ -21,6 +21,9 @@ body {
   align-items: center;
 }
 
+#reset {
+  padding-top: 32.5px;
+}
 
 div.page-title {
   font-size: 5rem;

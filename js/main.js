@@ -228,8 +228,6 @@ var bronzewoodLumber = new CraftedMaterial("Bronzewood Lumber", artificing, 1, 4
   { item: tincal, amount: 1 }
 ], CRAFTED);
 
-
-
 var livingBronzewood = new CraftedMaterial("Living Bronzewood", artificing, 1, 3, [
   { item: bronzewoodLumber, amount: 4 }, 
   { item: tearOfUbtao, amount: 1 }
@@ -439,6 +437,8 @@ var lichstoneSash = new CraftedItem("Lichstone Sash", tailoring, [], [
 var CRAFTABLE_ITEMS = [];
 var MATERIALS = [];
 var TOTALS_BY_MATERIAL = [];
+var ITEM_SELECTED = false;
+var TOTALS_EMPTIED = false;
 
 function initializePage() {
   CRAFTABLE_ITEMS = [];
@@ -478,12 +478,22 @@ window.onload = function() {
 
         for(var j = 0; j < craftableItemDivs.length; j++) {
           craftableItemDivs[j].classList.remove("selected");
+          
         }
         thisCraftableItemDiv.classList.add("selected");
 
-        // empty the state arrays
-        MATERIALS.splice(0, MATERIALS.length);
-        TOTALS_BY_MATERIAL.splice(0, TOTALS_BY_MATERIAL.length);
+        for(var k = 0; k < craftableItemDivs.length; k++) {
+          if(!craftableItemDivs[k].classList.contains("selected")) {
+            var col = craftableItemDivs[k].parentNode;
+            col.parentNode.removeChild(col);
+          }
+        }
+
+        // empty the state array
+        //MATERIALS.splice(0, MATERIALS.length);
+        //console.log("emptied materials");
+        //TOTALS_BY_MATERIAL.splice(0, TOTALS_BY_MATERIAL.length);
+        //console.log("emptied totals");
 
         selectItemApp.selectedItem = it.name;
 
@@ -514,6 +524,7 @@ window.onload = function() {
       var thisMat = this.mat;
       var thisMatItem = thisMat.item;
       var found = false;
+      console.log("updated for " + thisMatItem.name);
 
       if(typeof thisMatItem != "undefined" && thisMatItem.mtype == 'raw') {
         var thisMatItemName = thisMatItem.name;

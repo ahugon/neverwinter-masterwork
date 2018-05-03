@@ -47,6 +47,9 @@
             <p>Once you have made a selection, the display will update to reflect the required raw/crafted materials.  Additional recipes for armor & weapons will be added soon!</p>
             <div class="craftable-items row">
               <craftable-item v-for="craftable in craftables" :key="craftable.name" :item="craftable"></craftable-item>
+              <div id="reset" class="col-md-3 col-sm-3 col-xs-3" v-show="selectedItem != ''">
+                <a class="btn btn-default" onclick="window.location = './index.html';">Pick a different item...</a>
+              </div>
             </div>
             <div id="material-totals" v-show="totals.length > 0">
               <h1>{{ selectedItem }} total raw materials:</h1>
