@@ -228,10 +228,7 @@ var bronzewoodLumber = new CraftedMaterial("Bronzewood Lumber", artificing, 1, 4
   { item: tincal, amount: 1 }
 ], CRAFTED);
 
-var hardenedBronzewood = new CraftedMaterial("Hardened Bronzewood", mailsmithing, 0, 2, [
-  { item: bronzewoodLumber, amount: 4 }, 
-  { item: lakhVarnish, amount: 1 }
-], CRAFTED);
+
 
 var livingBronzewood = new CraftedMaterial("Living Bronzewood", artificing, 1, 3, [
   { item: bronzewoodLumber, amount: 4 }, 
@@ -283,7 +280,7 @@ var featheredOrnament = new CraftedMaterial("Feathered Ornament", jewelcrafting,
 
 var obsidianShard = new CraftedMaterial("Obsidian Shard", weaponsmithing, 1, 4, [
   { item: obsidian, amount: 12 }, 
-  { redRouge, amount: 1 }
+  { item: redRouge, amount: 1 }
 ], CRAFTED);
 
 var soulfiredObsidian = new CraftedMaterial("Soulfired Obsidian", weaponsmithing, 1, 3, [
@@ -294,6 +291,11 @@ var soulfiredObsidian = new CraftedMaterial("Soulfired Obsidian", weaponsmithing
 var lichstoneEnamel = new CraftedMaterial("Lichstone Enamel", artificing, 1, 3, [
   { item: lichstone, amount: 1 }, 
   { item: artisansEnamel, amount: 4 }
+], CRAFTED);
+
+var hardenedBronzewood = new CraftedMaterial("Hardened Bronzewood", mailsmithing, 0, 2, [
+  { item: bronzewoodLumber, amount: 4 }, 
+  { item: lakhVarnish, amount: 1 }
 ], CRAFTED);
 
 
@@ -511,10 +513,10 @@ window.onload = function() {
     mounted: function() {
       var thisMat = this.mat;
       var thisMatItem = thisMat.item;
-      var thisMatItemName = thisMatItem.name;
       var found = false;
 
-      if(thisMatItem.mtype == 'raw') {
+      if(typeof thisMatItem != "undefined" && thisMatItem.mtype == 'raw') {
+        var thisMatItemName = thisMatItem.name;
         for(var i = 0; i < TOTALS_BY_MATERIAL.length; i++) {
           var thisTotal = TOTALS_BY_MATERIAL[i];
           if(thisTotal.name == thisMatItemName) {
