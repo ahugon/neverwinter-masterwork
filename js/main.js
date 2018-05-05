@@ -514,31 +514,32 @@ window.onload = function() {
   });
 
   Vue.component('material', {
-    props: ['mat'], 
+    props: ['mat', 'multiplier'], 
     data: function() {
       return {
         expanded: false
       }
     }, 
     mounted: function() {
+      var mult = this.multiplier;
       var thisMat = this.mat;
       var thisMatItem = thisMat.item;
       var found = false;
-      console.log("updated for " + thisMatItem.name);
+      console.log("mounted for " + thisMatItem.name);
 
       if(typeof thisMatItem != "undefined" && thisMatItem.mtype == 'raw') {
         var thisMatItemName = thisMatItem.name;
         for(var i = 0; i < TOTALS_BY_MATERIAL.length; i++) {
           var thisTotal = TOTALS_BY_MATERIAL[i];
           if(thisTotal.name == thisMatItemName) {
-            thisTotal.count += thisMat.amount;
-            console.log("added " + thisMat.amount + " to total for " + thisMatItemName + ", now " + thisTotal.count);
+            thisTotal.count += (thisMat.amount * mult);
+            console.log("added " + (thisMat.amount * mult) + " to total for " + thisMatItemName + ", now " + thisTotal.count);
             found = true;
           }
         }
         if(!found) {
-          TOTALS_BY_MATERIAL.push({ name: thisMatItemName, count: thisMat.amount });
-          console.log("added initial " + thisMat.amount + " " + thisMatItemName);
+          TOTALS_BY_MATERIAL.push({ name: thisMatItemName, count: thisMat.amount * mult });
+          console.log("added initial " + (thisMat.amount * mult) + " " + thisMatItemName);
         }
       }
     }, 
@@ -555,7 +556,7 @@ window.onload = function() {
         <div class="crafted-material-expand" v-show="!expanded" @click="expanded = !expanded">Expand for requirements &raquo;</div>
         <div class="crafted-material-expand" v-show="expanded" @click="expanded = !expanded">&laquo; Collapse</div>
         <div class="crafted-material-reqs" v-show="expanded">
-          <material v-for="sm in mat.item.reqs" :key="sm.name" :mat="sm"></material>
+          <material v-for="sm in mat.item.reqs" :key="sm.name" :mat="sm" :multiplier="multiplier * ((mat.item.t3 > mat.amount) ? 1 : mat.amount / mat.item.t3)"></material>
         </div>
       </div>
     `
