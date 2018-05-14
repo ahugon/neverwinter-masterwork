@@ -556,7 +556,7 @@ window.onload = function() {
         <div class="crafted-material-expand" v-show="!expanded" @click="expanded = !expanded">Expand for requirements &raquo;</div>
         <div class="crafted-material-expand" v-show="expanded" @click="expanded = !expanded">&laquo; Collapse</div>
         <div class="crafted-material-reqs" v-show="expanded">
-          <material v-for="sm in mat.item.reqs" :key="sm.name" :mat="sm" :multiplier="multiplier * ((mat.item.t3 > mat.amount) ? 1 : mat.amount / mat.item.t3)"></material>
+          <material v-for="sm in mat.item.reqs" :key="sm.name" :mat="sm" :multiplier="multiplier * ((mat.item.t3 > mat.amount) ? 1 : Math.ceil(mat.amount / mat.item.t3))"></material>
         </div>
       </div>
     `
