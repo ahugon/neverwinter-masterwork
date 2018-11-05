@@ -669,36 +669,39 @@ window.onload = function() {
     props: ['item'], 
     methods: {
       itemClicked: function(it) {
-        var thisItem = this;
-        var el = thisItem.$el;
-        var thisCraftableItemDiv = el.children[0];
-        var craftableItemDivs = document.querySelectorAll('.craftable-item');
+        if(!ITEM_SELECTED) {
+          ITEM_SELECTED = true;
+          var thisItem = this;
+          var el = thisItem.$el;
+          var thisCraftableItemDiv = el.children[0];
+          var craftableItemDivs = document.querySelectorAll('.craftable-item');
 
-        for(var j = 0; j < craftableItemDivs.length; j++) {
-          craftableItemDivs[j].classList.remove("selected");
-          
-        }
-        thisCraftableItemDiv.classList.add("selected");
-
-        for(var k = 0; k < craftableItemDivs.length; k++) {
-          if(!craftableItemDivs[k].classList.contains("selected")) {
-            var col = craftableItemDivs[k].parentNode;
-            col.parentNode.removeChild(col);
+          for(var j = 0; j < craftableItemDivs.length; j++) {
+            craftableItemDivs[j].classList.remove("selected");
+            
           }
-        }
+          thisCraftableItemDiv.classList.add("selected");
 
-        // empty the state array
-        //MATERIALS.splice(0, MATERIALS.length);
-        //console.log("emptied materials");
-        //TOTALS_BY_MATERIAL.splice(0, TOTALS_BY_MATERIAL.length);
-        //console.log("emptied totals");
+          for(var k = 0; k < craftableItemDivs.length; k++) {
+            if(!craftableItemDivs[k].classList.contains("selected")) {
+              var col = craftableItemDivs[k].parentNode;
+              col.parentNode.removeChild(col);
+            }
+          }
 
-        selectItemApp.selectedItem = it.name;
+          // empty the state array
+          //MATERIALS.splice(0, MATERIALS.length);
+          //console.log("emptied materials");
+          //TOTALS_BY_MATERIAL.splice(0, TOTALS_BY_MATERIAL.length);
+          //console.log("emptied totals");
 
-        for(var i = 0; i < it.reqs.length; i++) {
-          var req = it.reqs[i];
-          console.log("adding req: " + req.item.name);
-          MATERIALS.push(req);
+          selectItemApp.selectedItem = it.name;
+
+          for(var i = 0; i < it.reqs.length; i++) {
+            var req = it.reqs[i];
+            console.log("adding req: " + req.item.name);
+            MATERIALS.push(req);
+          }
         }
       }
     }, 
