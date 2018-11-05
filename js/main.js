@@ -98,9 +98,9 @@ var tailoring = new Profession("Tailoring");
 var alchemy = new Profession("Alchemy");
 var jewelcrafting = new Profession("Jewelcrafting");
 var artificing = new Profession("Artificing");
-var platesmithing = new Profession("Platesmithing");
-var mailsmithing = new Profession("Mailsmithing");
-var weaponsmithing = new Profession("Weaponsmithing");
+
+var armorsmithing = new Profession("Armorsmithing");
+var blacksmithing = new Profession("Blacksmithing");
 var leatherworking = new Profession("Leatherworking");
 
 // declare zones
@@ -112,7 +112,9 @@ var dungeon = new Zone("Dungeon");
 var pe = new Zone("Protector's Enclave");
 var hotenow  = new Zone("Mount Hotenow");
 var whispering = new Zone("Whispering Caverns");
+var skyhold = new Zone("Pirate's Skyhold");
 var brynShander = new Zone("Icewind Dale: Bryn Shander");
+var lonelywood = new Zone("Icewind Dale: Lonelywood");
 var coldRun = new Zone("Icewind Dale: Cold Run");
 
 // declare sources of raw mats
@@ -120,34 +122,48 @@ var profVendor = new Origin("Professions Vendor", pe, COPPER);
 var mwVendor = new Origin("Travelling Merchant", stronghold, GMS);
 var hotenowMap = new Origin("Untapped Resources", hotenow, MAPS);
 var whisperingMap = new Origin("Untapped Resources", whispering, MAPS);
+var skyholdMap = new Origin("Untapped Resources", skyhold, MAPS);
 var brynShanderMap = new Origin("Untapped Resources", brynShander, MAPS);
+var lonelywoodMap = new Origin("Untapped Resources", lonelywood, MAPS);
 var coldRunMap = new Origin("Untapped Resources", coldRun, MAPS);
 var soshenstarMap = new Origin("Untapped Resources", soshenstar, MAPS);
 var omuMap = new Origin("Untapped Resources", omu, MAPS);
 var atelier = new Origin("Atelier", stronghold, GMS);
 var goldsmith = new Origin("Goldsmith", stronghold, GMS);
 var tenterground = new Origin("Tenterground", stronghold, GMS);
+var bloomery = new Origin("Bloomery", stronghold, GMS);
+var tannery = new Origin("Tannery", stronghold, GMS);
 var tong = new Origin("Tomb of the Nine Gods", dungeon, DROP);
 var msp = new Origin("Spellplague Caverns (Master)", dungeon, DROP);
 var allosaurs = new Origin("Allosaurs", soshenstar, DROP);
 var batiri = new Origin("Batiri", soshenstar, DROP);
 var spiders = new Origin("Spiders", chult, DROP);
+var dinosaurs = new Origin("Dinosaurs", chult, DROP);
+var lions = new Origin("Lions", chult, DROP);
 
 // declare trash mats
 var greenVitriol = new RawMaterial("Green Vitriol", atelier, 0.1, RAW);
 var sharkOil = new RawMaterial("Shark Oil", mwVendor, 250, RAW);
+var calfSkin = new RawMaterial("Calf Skin", mwVendor, 250, RAW);
 var rockSalt = new RawMaterial("Rock Salt", profVendor, 30, RAW);
+var charcoal = new RawMaterial("Charcoal", profVendor, 30, RAW);
 
 // declare raw mats from 1500 maps
 var alum = new RawMaterial("Alum", hotenowMap, 1, RAW);
 var nitre = new RawMaterial("Nitre", hotenowMap, 1, RAW);
 var goldOre = new RawMaterial("Gold Ore", whisperingMap, 1, RAW); 
 var salAmmoniac = new RawMaterial("Sal Ammoniac", hotenowMap, 1, RAW);
+var adamantSand = new RawMaterial("Adamant Sand", skyholdMap, 1, RAW);
+var lacquerBranch = new RawMaterial("Lacquer Branch", skyholdMap, 1, RAW);
+var silex = new RawMaterial("Silex", skyholdMap, 1, RAW);
+var slakedLime = new RawMaterial("Slaked Lime", whisperingMap, 1, RAW);
 
 // declare raw mats from SKT 3k maps
 var rawSphene = new RawMaterial("Raw Sphene", brynShanderMap, 1, RAW);
 var rawRubellite = new RawMaterial("Raw Rubellite", coldRunMap, 1, RAW);
 var effervescentWater = new RawMaterial("Effervescent Water", coldRunMap, 1, RAW);
+var spruceLog = new RawMaterial("Spruce Log", lonelywoodMap, 1, RAW);
+var nativeSilver = new RawMaterial("Native Silver", brynShanderMap, 1, RAW);
 
 // declare raw mats from Chult 3k maps
 var lakhResin = new RawMaterial("Lakh Resin", soshenstarMap, 1, RAW);
@@ -165,13 +181,16 @@ var alkali = new RawMaterial("Alkali", atelier, 2000, RAW);
 var redRouge = new RawMaterial("Red Rouge", goldsmith, 2000, RAW);
 var potash = new RawMaterial("Potash", tenterground, 2000, RAW);
 var terebinth = new RawMaterial("Terebinth", atelier, 400, RAW);
-
+var ironRust = new RawMaterial("Iron Rust", bloomery, 200, RAW);
+var tannersLiquor = new RawMaterial("Tanner's Liquor", tannery, 2000, RAW);
 
 // declare drops
 var tearOfUbtao = new RawMaterial("Tear of Ubtao", tong, 0, RAW);
 var allosaurFang = new RawMaterial("Allosaur Fang", allosaurs, 0, RAW);
 var batiriPrism = new RawMaterial("Batiri Prism", batiri, 0, RAW);
 var spiderSilk = new RawMaterial("Spider Silk", spiders, 0, RAW);
+var dinosaurHide = new RawMaterial("Dinosaur Hide", dinosaurs, 0, RAW);
+var lionHide = new RawMaterial("Lion Hide", lions, 0, RAW);
 var fartouchedResiduum = new RawMaterial("Fartouched Residuum", msp, 0, RAW);
 var moteOfSoulfire = new RawMaterial("Mote of Soulfire", tong, 0, RAW);
 var lichstone = new RawMaterial("Lichstone", tong, 0, RAW);
@@ -182,6 +201,17 @@ var lichstone = new RawMaterial("Lichstone", tong, 0, RAW);
 var goldNugget = new CraftedMaterial("Gold Nugget", jewelcrafting, 0, 1, [
   { item: goldOre, amount: 2 }, 
   { item: rockSalt, amount: 1 }
+], CRAFTED);
+
+var darkLacquer = new CraftedMaterial("Dark Lacquer", artificing, 0, 1, [
+  { item: lacquerBranch, amount: 4 }, 
+  { item: charcoal, amount: 2 }
+], CRAFTED);
+
+var redEnamel = new CraftedMaterial("Red Enamel", alchemy, 0, 1, [
+  { item: silex, amount: 6 }, 
+  { item: ironRust, amount: 2 }, 
+  { item: terebinth, amount: 1 }
 ], CRAFTED);
 
 var oilOfVitriol = new CraftedMaterial("Oil of Vitriol", alchemy, 0, 1, [
@@ -200,12 +230,31 @@ var concentratedAquaRegia = new CraftedMaterial("Concentrated Aqua Regia", alche
   { item: nitre, amount: 1 }
 ], CRAFTED);
 
+var vellum = new CraftedMaterial("Vellum", leatherworking, 0, 1, [
+  { item: slakedLime, amount: 1 }, 
+  { item: calfSkin, amount: 1}
+], CRAFTED);
+
+var adamantBloom = new CraftedMaterial("Adamant Bloom", blacksmithing, 0, 1, [
+  { item: adamantSand, amount: 3 }, 
+  { item: charcoal, amount: 3 }
+], CRAFTED);
+
+var adamantIngot = new CraftedMaterial("Adamant Ingot", blacksmithing, 0, 1, [
+  { item: adamantBloom, amount: 2 }, 
+  { item: darkLacquer, amount: 1 }
+], CRAFTED);
+
+var adamantPlate = new CraftedMaterial("Adamant Plate", armorsmithing, 0, 1, [
+  { item: adamantIngot, amount: 1 }
+], CRAFTED);
+
 var goldIngot = new CraftedMaterial("Gold Ingot", jewelcrafting, 0, 1, [
   { item: goldNugget, amount: 3 }, 
   { item: concentratedAquaRegia, amount: 1 }
 ], CRAFTED);
 
-var goldWire = new CraftedMaterial("Gold Wire", mailsmithing, 0, 1, [
+var goldWire = new CraftedMaterial("Gold Wire", jewelcrafting, 0, 1, [
   { item: goldIngot, amount: 2 }, 
   { item: sharkOil, amount: 2 }
 ], CRAFTED);
@@ -216,10 +265,32 @@ var scintillantGlass = new CraftedMaterial("Scintillant Glass", artificing, 1, 5
   { item: goldWire, amount: 1 }
 ], CRAFTED);
 
+var sphene = new CraftedMaterial("Sphene", jewelcrafting, 1, 5, [
+  { item: rawSphene, amount: 4 }, 
+  { item: redRouge, amount: 1 }
+], CRAFTED);
+
+var rubellite = new CraftedMaterial("Rubellite", jewelcrafting, 1, 5, [
+  { item: rawRubellite, amount: 4 }, 
+  { item: redRouge, amount: 1 }
+], CRAFTED);
+
 var artisansEnamel = new CraftedMaterial("Artisan's Enamel", artificing, 1, 5, [
   { item: scintillantGlass, amount: 2 }, 
   { item: fartouchedResiduum, amount: 1 }, 
   { item: alkali, amount: 1 }
+], CRAFTED);
+
+var hardsand = new CraftedMaterial("Hardsand", alchemy, 1, 5, [
+  { item: spruceLog, amount: 2 }, 
+  { item: adamantPlate, amount: 1 }
+], CRAFTED);
+
+var brightsilverIngot = new CraftedMaterial("Brightsilver Ingot", jewelcrafting, 1, 5, [
+  { item: redRouge, amount: 1 }, 
+  { item: scintillantGlass, amount: 1 }, 
+  { item: hardsand, amount: 2 }, 
+  { item: nativeSilver, amount: 10 }
 ], CRAFTED);
 
 // mw4: 
@@ -276,12 +347,12 @@ var featheredOrnament = new CraftedMaterial("Feathered Ornament", jewelcrafting,
   { item: brilliantBead, amount: 4 }
 ], CRAFTED);
 
-var obsidianShard = new CraftedMaterial("Obsidian Shard", weaponsmithing, 1, 4, [
+var obsidianShard = new CraftedMaterial("Obsidian Shard", blacksmithing, 1, 4, [
   { item: obsidian, amount: 12 }, 
   { item: redRouge, amount: 1 }
 ], CRAFTED);
 
-var soulfiredObsidian = new CraftedMaterial("Soulfired Obsidian", weaponsmithing, 1, 3, [
+var soulfiredObsidian = new CraftedMaterial("Soulfired Obsidian", blacksmithing, 1, 3, [
   { item: obsidianShard, amount: 4 }, 
   { item: moteOfSoulfire, amount: 1 }
 ], CRAFTED);
@@ -291,9 +362,23 @@ var lichstoneEnamel = new CraftedMaterial("Lichstone Enamel", artificing, 1, 3, 
   { item: artisansEnamel, amount: 4 }
 ], CRAFTED);
 
-var hardenedBronzewood = new CraftedMaterial("Hardened Bronzewood", mailsmithing, 0, 2, [
+var hardenedBronzewood = new CraftedMaterial("Hardened Bronzewood", armorsmithing, 0, 2, [
   { item: bronzewoodLumber, amount: 4 }, 
   { item: lakhVarnish, amount: 1 }
+], CRAFTED);
+
+var lionFur = new CraftedMaterial("Lion Fur", leatherworking, 0, 2, [
+  { item: lionHide, amount: 12 }, 
+  { item: alum, amount: 6 }, 
+  { item: tincal, amount: 1 }, 
+  { item: tannersLiquor, amount: 1 }
+], CRAFTED);
+
+var lacqueredDinosaurLeather = new CraftedMaterial("Lacquered Dinosaur Leather", leatherworking, 0, 2, [
+  { item: chultanTeaLeaves, amount: 12 }, 
+  { item: tannersLiquor, amount: 1 }, 
+  { item: lakhVarnish, amount: 2 }, 
+  { item: dinosaurHide, amount: 8 }
 ], CRAFTED);
 
 
@@ -380,31 +465,117 @@ var lichstoneAmulet = new CraftedItem("Lichstone Amulet", jewelcrafting, [
   ]);
 
 /* weapons */
-var obsidianMiztonhiyo = new CraftedItem("Obsidian Miztonhiyo (CW main)", artificing, [], [
+// CW
+var obsidianMiztonhiyo = new CraftedItem("Obsidian Miztonhiyo (CW)", artificing, [], [
     { item: livingBronzewood, amount: 3 }, 
     { item: juteMacrame, amount: 4 }, 
     { item: featheredOrnament, amount: 2 }, 
     { item: obsidianShard, amount: 1 }, 
     { item: lakhVarnish, amount: 1 }
   ]);
-var fangedQuiilpia = new CraftedItem("Fanged Quiilpia (CW off)", artificing, [], [
+var fangedQuiilpia = new CraftedItem("Fanged Quiilpia (CW)", artificing, [], [
     { item: livingBronzewood, amount: 3 }, 
     { item: brilliantBead, amount: 4 }, 
     { item: fangedOrnament, amount: 2 }, 
     { item: chultanSilkThread, amount: 1 }
   ]);
-var featheredTeotlanextli = new CraftedItem("Feathered Teotlanextli (DC main)", artificing, [], [
+// DC
+var featheredTeotlanextli = new CraftedItem("Feathered Teotlanextli (DC)", artificing, [], [
     { item: livingBronzewood, amount: 3 }, 
     { item: juteMacrame, amount: 4 }, 
     { item: featheredOrnament, amount: 2 }, 
     { item: obsidianShard, amount: 1 }, 
     { item: lakhVarnish, amount: 1 }
   ]);
-var featheredIlhuilli = new CraftedItem("Feathered Ilhuilli (DC off)", artificing, [], [
+var featheredIlhuilli = new CraftedItem("Feathered Ilhuilli (DC)", artificing, [], [
     { item: soulfiredObsidian, amount: 3 }, 
     { item: hardenedBronzewood, amount: 4 }, 
     { item: fangedOrnament, amount: 2 }, 
     { item: lakhVarnish, amount: 1 }
+  ]);
+// SW
+var obsidianTecpatl = new CraftedItem("Obsidian Tecpatl (SW)", artificing, [], [
+    { item: livingBronzewood, amount: 3 }, 
+    { item: obsidianShard, amount: 4 }, 
+    { item: featheredOrnament, amount: 2 }, 
+    { item: juteMacrame, amount: 1 }, 
+    { item: lakhVarnish, amount: 1 }
+  ]);
+var dinohideTemicamatl = new CraftedItem("Dinohide Temicamatl (SW)", artificing, [], [
+    { item: livingVarnish, amount: 3 }, 
+    { item: lacqueredDinosaurLeather, amount: 4 }, 
+    { item: chultanSilkThread, amount: 2 }, 
+    { item: vellum, amount: 4 }
+  ]);
+// HR
+var bronzewoodTlahuitolli = new CraftedItem("Bronzewood Tlahuitolli (HR)", artificing, [], [
+    { item: livingBronzewood, amount: 3 }, 
+    { item: featheredOrnament, amount: 2 }, 
+    { item: obsidianShard, amount: 2 }, 
+    { item: chultanSilkThread, amount: 2}, 
+    { item: lakhVarnish, amount: 1 }
+  ]);
+var obsidianItztopilli = new CraftedItem("Obsidian Itztopilli (HR)", blacksmithing, [], [
+    { item: soulfiredObsidian, amount: 3 }, 
+    { item: hardenedBronzewood, amount: 4 }, 
+    { item: lionFur, amount: 2 }, 
+    { item: bronzewoodLumber, amount: 1 }
+  ]);
+// GF
+var bronzewoodMacuahuitl = new CraftedItem("Bronzewood Macuahuitl (GF)", blacksmithing, [], [
+    { item: soulfiredObsidian, amount: 3 }, 
+    { item: hardenedBronzewood, amount: 4 }, 
+    { item: lacqueredDinosaurLeather, amount: 2 }, 
+    { item: brightsilverIngot, amount: 3 }, 
+    { item: sphene, amount: 1 }
+  ]);
+var bronzewoodMahuizzochimalli = new CraftedItem("Bronzewood Mahuizzochimalli (GF)", armorsmithing, [], [
+    { item: livingBronzewood, amount: 3 }, 
+    { item: featheredOrnament, amount: 2 }, 
+    { item: obsidianShard, amount: 4 }, 
+    { item: lionFur, amount: 1 }
+  ]);
+// OP
+var bronzewoodQuauhololli = new CraftedItem("Bronzewood Quauhololli (OP)", blacksmithing, [], [
+    { item: soulfiredObsidian, amount: 3 }, 
+    { item: hardenedBronzewood, amount: 4 }, 
+    { item: lacqueredDinosaurLeather, amount: 2 }, 
+    { item: darkLacquer, amount: 3 }, 
+    { item: chultanSilk, amount: 1 }
+  ]);
+var bronzewoodCuauhchimalli = new CraftedItem("Bronzewood Cuauhchimalli (OP)", armorsmithing, [], [
+    { item: livingBronzewood, amount: 3 }, 
+    { item: hardenedBronzewood, amount: 4 }, 
+    { item: lacqueredDinosaurLeather, amount: 1 }, 
+    { item: lionFur, amount: 2 }
+  ]);
+// GWF
+var bronzewoodHuitzauhqui = new CraftedItem("Bronzewood Huitzauhqui (GWF)", blacksmithing, [], [
+    { item: soulfiredObsidian, amount: 3 }, 
+    { item: hardenedBronzewood, amount: 4 }, 
+    { item: lacqueredDinosaurLeather, amount: 2 }, 
+    { item: brightsilverIngot, amount: 3 }, 
+    { item: redEnamel, amount: 4 }
+  ]);
+var silkMecatica = new CraftedItem("Silk Mecatica (GWF)", blacksmithing, [], [
+    { item: soulfiredObsidian, amount: 3 }, 
+    { item: brilliantBead, amount: 4 }, 
+    { item: featheredOrnament, amount: 2 }, 
+    { item: chultanSilkThread, amount: 1 }
+  ]);
+// TR
+var obsidianOmihuictli = new CraftedItem("Obsidian Omihuictli (TR)", blacksmithing, [], [
+    { item: soulfiredObsidian, amount: 3 }, 
+    { item: obsidianShard, amount: 4 }, 
+    { item: lacqueredDinosaurLeather, amount: 2 }, 
+    { item: hardenedBronzewood, amount: 1 }, 
+    { item: featheredOrnament, amount: 1 }
+  ]);
+var obsidianItecpayo = new CraftedItem("Obsidian Itecpayo (TR)", blacksmithing, [], [
+    { item: soulfiredObsidian, amount: 3 }, 
+    { item: hardenedBronzewood, amount: 4 }, 
+    { item: featheredOrnament, amount: 2 }, 
+    { item: brightsilverIngot, amount: 1 }
   ]);
 
 /* belts */
@@ -458,10 +629,37 @@ function initializePage() {
   CRAFTABLE_ITEMS.push(fangedSash.vueObject());
   CRAFTABLE_ITEMS.push(lichstoneSash.vueObject());
 
+  // CW
   CRAFTABLE_ITEMS.push(obsidianMiztonhiyo.vueObject());
   CRAFTABLE_ITEMS.push(fangedQuiilpia.vueObject());
+
+  // DC
   CRAFTABLE_ITEMS.push(featheredTeotlanextli.vueObject());
   CRAFTABLE_ITEMS.push(featheredIlhuilli.vueObject());
+
+  // SW
+  CRAFTABLE_ITEMS.push(obsidianTecpatl.vueObject());
+  CRAFTABLE_ITEMS.push(dinohideTemicamatl.vueObject());
+
+  // HR
+  CRAFTABLE_ITEMS.push(bronzewoodTlahuitolli.vueObject());
+  CRAFTABLE_ITEMS.push(obsidianItztopilli.vueObject());
+
+  // OP
+  CRAFTABLE_ITEMS.push(bronzewoodQuauhololli.vueObject());
+  CRAFTABLE_ITEMS.push(bronzewoodCuauhchimalli.vueObject());
+
+  // GF
+  CRAFTABLE_ITEMS.push(bronzewoodMacuahuitl.vueObject());
+  CRAFTABLE_ITEMS.push(bronzewoodMahuizzochimalli.vueObject());
+
+  // GWF
+  CRAFTABLE_ITEMS.push(bronzewoodHuitzauhqui.vueObject());
+  CRAFTABLE_ITEMS.push(silkMecatica.vueObject());
+
+  // TR
+  CRAFTABLE_ITEMS.push(obsidianOmihuictli.vueObject());
+  CRAFTABLE_ITEMS.push(obsidianItecpayo.vueObject());
 }
 
 window.onload = function() {
