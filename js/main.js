@@ -76,7 +76,9 @@ class CraftedItem {
 var MAPS = "Explorer Chart";
 var GMS = "Guild Marks";
 var DROP = "Chest/Drop";
-var COPPER = "Coppers";
+var COPPER = "Copper";
+var SILVER = "Silver";
+var GOLD = "Gold";
 
 // types of mats
 var RAW = "raw";
@@ -98,7 +100,6 @@ var tailoring = new Profession("Tailoring");
 var alchemy = new Profession("Alchemy");
 var jewelcrafting = new Profession("Jewelcrafting");
 var artificing = new Profession("Artificing");
-
 var armorsmithing = new Profession("Armorsmithing");
 var blacksmithing = new Profession("Blacksmithing");
 var leatherworking = new Profession("Leatherworking");
@@ -118,6 +119,7 @@ var lonelywood = new Zone("Icewind Dale: Lonelywood");
 var coldRun = new Zone("Icewind Dale: Cold Run");
 
 // declare sources of raw mats
+var gathering = new Origin("Gathering", pe, GOLD);
 var profVendor = new Origin("Professions Vendor", pe, COPPER);
 var mwVendor = new Origin("Travelling Merchant", stronghold, GMS);
 var hotenowMap = new Origin("Untapped Resources", hotenow, MAPS);
@@ -142,11 +144,11 @@ var dinosaurs = new Origin("Dinosaurs", chult, DROP);
 var lions = new Origin("Lions", chult, DROP);
 
 // declare trash mats
-var greenVitriol = new RawMaterial("Green Vitriol", atelier, 0.1, RAW);
+var ironSand = new RawMaterial("Iron Sand", gathering, 0.2, RAW);
+var oakLog = new RawMaterial("Oak Log", gathering, 0.75, RAW);
 var sharkOil = new RawMaterial("Shark Oil", mwVendor, 250, RAW);
 var calfSkin = new RawMaterial("Calf Skin", mwVendor, 250, RAW);
 var rockSalt = new RawMaterial("Rock Salt", profVendor, 30, RAW);
-var charcoal = new RawMaterial("Charcoal", profVendor, 30, RAW);
 
 // declare raw mats from 1500 maps
 var alum = new RawMaterial("Alum", hotenowMap, 1, RAW);
@@ -195,6 +197,11 @@ var fartouchedResiduum = new RawMaterial("Fartouched Residuum", msp, 0, RAW);
 var moteOfSoulfire = new RawMaterial("Mote of Soulfire", tong, 0, RAW);
 var lichstone = new RawMaterial("Lichstone", tong, 0, RAW);
 
+// crafted mats level 1-70:
+var craftedCharcoal = new CraftedMaterial("Charcoal", alchemy, 0, 4, [
+  { item: oakLog, amount: 12 }
+], CRAFTED);
+
 // declare crafted mats (mw1-4)
 // mw1-3: 
 
@@ -205,7 +212,7 @@ var goldNugget = new CraftedMaterial("Gold Nugget", jewelcrafting, 0, 1, [
 
 var darkLacquer = new CraftedMaterial("Dark Lacquer", artificing, 0, 1, [
   { item: lacquerBranch, amount: 4 }, 
-  { item: charcoal, amount: 2 }
+  { item: craftedCharcoal, amount: 2 }
 ], CRAFTED);
 
 var redEnamel = new CraftedMaterial("Red Enamel", alchemy, 0, 1, [
@@ -215,7 +222,7 @@ var redEnamel = new CraftedMaterial("Red Enamel", alchemy, 0, 1, [
 ], CRAFTED);
 
 var oilOfVitriol = new CraftedMaterial("Oil of Vitriol", alchemy, 0, 1, [
-  { item: greenVitriol, amount: 4 }
+  { item: ironSand, amount: 12 }
 ], CRAFTED);
 
 var aquaFortis = new CraftedMaterial("Aqua Fortis", alchemy, 0, 1, [
@@ -237,7 +244,7 @@ var vellum = new CraftedMaterial("Vellum", leatherworking, 0, 1, [
 
 var adamantBloom = new CraftedMaterial("Adamant Bloom", blacksmithing, 0, 1, [
   { item: adamantSand, amount: 3 }, 
-  { item: charcoal, amount: 3 }
+  { item: craftedCharcoal, amount: 3 }
 ], CRAFTED);
 
 var adamantIngot = new CraftedMaterial("Adamant Ingot", blacksmithing, 0, 1, [
@@ -757,7 +764,7 @@ window.onload = function() {
         <div class="crafted-material-expand" v-show="!expanded" @click="expanded = !expanded">Expand for requirements &raquo;</div>
         <div class="crafted-material-expand" v-show="expanded" @click="expanded = !expanded">&laquo; Collapse</div>
         <div class="crafted-material-reqs" v-show="expanded">
-          <material v-for="sm in mat.item.reqs" :key="sm.name" :mat="sm" :multiplier="multiplier * ((mat.item.t3 > mat.amount) ? 1 : Math.ceil(mat.amount / mat.item.t3))"></material>
+          <material v-for="sm in mat.item.reqs" :key="sm.item.name" :mat="sm" :multiplier="multiplier * ((mat.item.t3 > mat.amount) ? 1 : Math.ceil(mat.amount / mat.item.t3))"></material>
         </div>
       </div>
     `
