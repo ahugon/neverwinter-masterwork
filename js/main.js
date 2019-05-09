@@ -674,7 +674,7 @@ window.onload = function() {
     mounted: function() {
       var mult = this.multiplier;
       var thisMat = this.mat;
-      //this.$emit('addtototals', thisMat, mult);
+      this.$root.$emit('addtototals', [thisMat, mult]);
     }, 
     template: `
       <div class="raw-material" v-if="mat.item.mtype == 'raw'">
@@ -698,10 +698,8 @@ window.onload = function() {
   Vue.component('total', {
     props: ['t'], 
     template: `
-      <div class="col-md-3 col-sm-3 col-xs-3">
-        <div class="raw-material">
-          <div class="raw-material-name">{{ t.name }} &times; {{ t.count }}</div>
-        </div>
+      <div class="raw-material">
+        <div class="raw-material-name">{{ t.name }} &times; {{ t.count }}</div>
       </div>
     `
   });
@@ -715,6 +713,10 @@ window.onload = function() {
       totals: [], 
       selectedItem: ""
     }, 
+    mounted: function() {
+      // register listener on root to listen for addtototals event (from material component)
+      this.$root.$on("addtototals", this.addMaterialToTotals);
+    }, 
     methods: {
       resetPage: function() {
         this.materials = [];
@@ -727,7 +729,11 @@ window.onload = function() {
       addMaterial: function(mat) {
         this.materials.push(mat);
       }, 
-      addMaterialToTotals: function(mat, mult) {
+      addMaterialToTotals: function(mat_mult) {
+        var mat = mat_mult[0];
+        var mult = mat_mult[1];
+        //console.log("root version of addMaterialToTotals() called with " + mat.item.name + " x " + mult);
+
         var item = mat.item;
         var found = false;
 
