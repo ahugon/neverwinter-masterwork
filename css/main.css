@@ -84,7 +84,10 @@ div.white-box p {
 }
 
 div.craftable-items {
-
+  overflow: hidden;
+  position: relative;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 
 div.craftable-items div.craftable-item {
@@ -96,6 +99,10 @@ div.craftable-items div.craftable-item {
   font-weight: 700;
   padding: 1.5rem 0.5rem;
   margin-bottom: 2rem;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: calc(25% - 30px);
+  float: left;
   min-height: 105px;
   position: relative;
   top: 4px;
@@ -113,6 +120,10 @@ div.craftable-items div.craftable-item.selected {
   border-bottom: 0.33rem solid #663399;
   background-color: #663399;
   color: #FFFFFF;
+}
+
+div.craftable-items div.craftable-item.not-selected {
+  display: none;
 }
 
 div.craftable-items div.craftable-item.selected:after {

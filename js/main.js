@@ -568,10 +568,6 @@ var lichstoneSash = new CraftedItem("Lichstone Sash", tailoring, [
 
 
 var CRAFTABLE_ITEMS = [];
-var MATERIALS = [];
-var TOTALS_BY_MATERIAL = [];
-var ITEM_SELECTED = false;
-var TOTALS_EMPTIED = false;
 
 function initializePage() {
   CRAFTABLE_ITEMS = [];
@@ -628,50 +624,42 @@ window.onload = function() {
   initializePage();
 
   Vue.component('craftable-item', {
-    props: ['item'], 
+    props: ['item', 'selection'], 
+    data: function() {
+      return {
+        selected: false, 
+      }
+    }, 
     methods: {
-      itemClicked: function(it) {
-        if(!ITEM_SELECTED) {
-          ITEM_SELECTED = true;
-          var thisItem = this;
-          var el = thisItem.$el;
-          var thisCraftableItemDiv = el.children[0];
-          var craftableItemDivs = document.querySelectorAll('.craftable-item');
+      itemClicked: function() {
+        if(!this.selected) { // only process the click if it's being selected,
+                              // not if it's being repeatedly clicked after selected
+          this.$emit('selectitem', this.item.name);
+          this.selected = true;
 
-          for(var j = 0; j < craftableItemDivs.length; j++) {
-            craftableItemDivs[j].classList.remove("selected");
-            
-          }
-          thisCraftableItemDiv.classList.add("selected");
-
-          for(var k = 0; k < craftableItemDivs.length; k++) {
-            if(!craftableItemDivs[k].classList.contains("selected")) {
-              var col = craftableItemDivs[k].parentNode;
-              col.parentNode.removeChild(col);
-            }
-          }
-
-          // empty the state array
-          //MATERIALS.splice(0, MATERIALS.length);
-          //console.log("emptied materials");
-          //TOTALS_BY_MATERIAL.splice(0, TOTALS_BY_MATERIAL.length);
-          //console.log("emptied totals");
-
-          selectItemApp.selectedItem = it.name;
-
-          for(var i = 0; i < it.reqs.length; i++) {
-            var req = it.reqs[i];
+          for(var i = 0; i < this.item.reqs.length; i++) {
+            var req = this.item.reqs[i];
             console.log("adding req: " + req.item.name);
-            MATERIALS.push(req);
+            this.$emit('addmaterial', req);
           }
+        }
+      }, 
+      getSelectedClass: function() {
+        if(this.selection != "") {
+          if(this.selection == this.item.name) {
+            return "selected";
+          } else {
+            this.selected = false;
+            return "not-selected";
+          }
+        } else {
+          return "";
         }
       }
     }, 
     template: `
-      <div class="col-md-3 col-sm-3 col-xs-3">
-        <div class="craftable-item vert-flex" @click="itemClicked(item)">
-          <div class="craftable-item-name">{{ item.name }}</div>
-        </div>
+      <div class="craftable-item vert-flex" @click="itemClicked()" :class="getSelectedClass()">
+        <div class="craftable-item-name">{{ item.name }}</div>
       </div>
     `
   });
@@ -686,25 +674,7 @@ window.onload = function() {
     mounted: function() {
       var mult = this.multiplier;
       var thisMat = this.mat;
-      var thisMatItem = thisMat.item;
-      var found = false;
-      console.log("mounted for " + thisMatItem.name);
-
-      if(typeof thisMatItem != "undefined" && thisMatItem.mtype == 'raw') {
-        var thisMatItemName = thisMatItem.name;
-        for(var i = 0; i < TOTALS_BY_MATERIAL.length; i++) {
-          var thisTotal = TOTALS_BY_MATERIAL[i];
-          if(thisTotal.name == thisMatItemName) {
-            thisTotal.count += (thisMat.amount * mult);
-            console.log("added " + (thisMat.amount * mult) + " to total for " + thisMatItemName + ", now " + thisTotal.count);
-            found = true;
-          }
-        }
-        if(!found) {
-          TOTALS_BY_MATERIAL.push({ name: thisMatItemName, count: thisMat.amount * mult });
-          console.log("added initial " + (thisMat.amount * mult) + " " + thisMatItemName);
-        }
-      }
+      //this.$emit('addtototals', thisMat, mult);
     }, 
     template: `
       <div class="raw-material" v-if="mat.item.mtype == 'raw'">
@@ -737,13 +707,46 @@ window.onload = function() {
   });
 
   // Vue app
-  var selectItemApp = new Vue({
+  var vm = new Vue({
     el: '#item-select-wrap', 
     data: {
       craftables: CRAFTABLE_ITEMS, 
-      materials: MATERIALS, 
-      totals: TOTALS_BY_MATERIAL, 
+      materials: [], 
+      totals: [], 
       selectedItem: ""
+    }, 
+    methods: {
+      resetPage: function() {
+        this.materials = [];
+        this.totals = [];
+        this.selectedItem = "";
+      }, 
+      selectItem: function(si) {
+        this.selectedItem = si;
+      }, 
+      addMaterial: function(mat) {
+        this.materials.push(mat);
+      }, 
+      addMaterialToTotals: function(mat, mult) {
+        var item = mat.item;
+        var found = false;
+
+        if(typeof item != "undefined" && item.mtype == 'raw') {
+          var itemName = item.name;
+          for(var i = 0; i < this.totals.length; i++) {
+            var total = this.totals[i];
+            if(total.name == itemName) {
+              total.count += (mat.amount * mult);
+              console.log("added " + (mat.amount * mult) + " to total for " + itemName + ", now " + total.count);
+              found = true;
+            }
+          }
+          if(!found) {
+            this.totals.push({ name: itemName, count: mat.amount * mult });
+            console.log("added initial " + (mat.amount * mult) + " " + itemName);
+          }
+        }
+      }
     }
   });
 

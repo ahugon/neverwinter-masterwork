@@ -35,20 +35,16 @@
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
           <div class="page-title">Nyv's Workshop</div>
-          <div class="row">
-            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-              <div class="page-subtitle">
-                A simple interface intended to help Neverwinter players determine which raw materials need to be farmed, crafted, or purchased in order to commission a masterwork crafter to create some of Faerun's most sought-after equipment. Updated for Heart of Fire (mod15)!
-              </div>
-            </div>
+          <div class="page-subtitle">
+            A simple interface to help calculate which raw materials to farm, craft, or purchase in order for a Masterwork Crafter to help you create MW5 gear in Neverwinter.
           </div>
           <div class="white-box" id="item-select-wrap">
             <h1>Select an item:</h1>
             <p>Once you have made a selection, the display will update to reflect the required raw/crafted materials.</p>
-            <div class="craftable-items row">
-              <craftable-item v-for="craftable in craftables" :key="craftable.name" :item="craftable"></craftable-item>
+            <div class="craftable-items">
+              <craftable-item v-on:selectitem="selectItem" v-on:addmaterial="addMaterial" v-for="craftable in craftables" :key="craftable.name" :item="craftable" :selection="selectedItem"></craftable-item>
               <div id="reset" class="col-md-3 col-sm-3 col-xs-3" v-show="selectedItem != ''">
-                <a class="btn btn-default" onclick="window.location = './index.html';">Pick a different item...</a>
+                <a class="btn btn-default" @click="resetPage()">Pick a different item...</a>
               </div>
             </div>
             <div id="material-totals" v-show="totals.length > 0">
