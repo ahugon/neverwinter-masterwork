@@ -34,41 +34,53 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
-          <div class="page-title">Nyv's Workshop</div>
+          <div class="page-title">Neverwinter Masterwork Workshop</div>
           <div class="page-subtitle">
-            A simple interface to help calculate which raw materials to farm, craft, or purchase in order for a Masterwork Crafter to help you create MW5 gear in Neverwinter.
+            Which materials do you need to craft the masterwork gear you want?
           </div>
           <div class="white-box" id="item-select-wrap">
-            <h1>Select an item:</h1>
-            <p>Once you have made a selection, the display will update to reflect the required raw/crafted materials.</p>
-            <div class="craftable-items">
-              <craftable-item @selectitem="selectItem" @addmaterial="addMaterial" v-for="craftable in craftables" :key="craftable.name" :item="craftable" :selection="selectedItem"></craftable-item>
-              <div id="reset" class="col-md-3 col-sm-3 col-xs-3" v-show="selectedItem != ''">
-                <a class="btn btn-default" @click="resetPage()">Pick a different item...</a>
+            <div class="select-tier" v-show="selectedTier == ''">
+              <h1>Select a MW rank:</h1>
+              <div class="mw-tiers">
+                <mw-tier @selecttier="selectTier" v-for="tier in tiers" :key="tier.name" :tier="tier"></mw-tier>
               </div>
             </div>
-            <div id="material-totals" v-show="totals.length > 0">
-              <h1>{{ selectedItem }} total raw materials:</h1>
-              <div class="totals">
-                <total v-for="tot in totals" :key="tot.name" :t="tot"></total>
+            <div class="select-item" v-show="selectedTier != ''">
+              <h1>Select an item:</h1>
+              <p>Once you have made a selection, the display will update to reflect the required raw/crafted materials.</p>
+              <div id="reset" v-show="selectedTier != '' || selectedItem != ''">
+                <p>
+                  <a class="btn btn-default" @click="resetTier()" v-show="selectedTier != ''">Pick a different MW tier</a> 
+                  <a class="btn btn-default" @click="resetItem()" v-show="selectedItem != ''">Pick a different MW {{ selectedTier }} item...</a> 
+                </p>
               </div>
-            </div>
-            <div id="material-list" v-show="materials.length > 0">
-              <h1>{{ selectedItem }} recipe visualization:</h1>
-              <div class="row">
-                <div class="col-md-2 col-sm-3 col-xs-6">
-                  <div class="key-circle crafted">Crafted</div>
-                </div>
-                <div class="col-md-2 col-sm-3 col-xs-6">
-                  <div class="key-circle raw">Raw</div>
+              <div class="craftable-items">
+                <craftable-item @selectitem="selectItem" @addmaterial="addMaterial" v-for="craftable in craftables" :key="craftable.name" :item="craftable" :selection="selectedItem"></craftable-item>
+              </div>
+              <div class="alert alert-info" v-show="craftables.length == 0">No items available for MW {{ selectedTier }} at this time.</div>
+              <div id="material-totals" v-show="totals.length > 0">
+                <h1>{{ selectedItem }} total raw materials:</h1>
+                <div class="totals">
+                  <total v-for="tot in totals" :key="tot.name" :t="tot"></total>
                 </div>
               </div>
-              <material v-for="m in materials" :key="m.name" :mat="m" :multiplier="1"></material>
+              <div id="material-list" v-show="materials.length > 0">
+                <h1>{{ selectedItem }} recipe visualization:</h1>
+                <div class="row">
+                  <div class="col-md-2 col-sm-3 col-xs-6">
+                    <div class="key-circle crafted">Crafted</div>
+                  </div>
+                  <div class="col-md-2 col-sm-3 col-xs-6">
+                    <div class="key-circle raw">Raw</div>
+                  </div>
+                </div>
+                <material v-for="m in materials" :key="m.name" :mat="m" :multiplier="1"></material>
+              </div>
             </div>
           </div>
           <div class="footer">
             Built by Nyvaril from Civil Anarchy<br>
-            Special thanks to PzK, Tanya, and Rainer of CA & the folks at NW:UN for assistance with recipes.
+            Special thanks to PzK, Tanya, and Rainer for assistance with recipes.
           </div>
         </div>
       </div>

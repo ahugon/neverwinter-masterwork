@@ -9,7 +9,7 @@ body {
   height: 100%;
   font-family: "Montserrat";
   font-size: 1em;
-  background-color: #eaeaea; /* Old browsers */
+  background-color: #1A2338; /* Old browsers */
 }
 
 .vert-flex {
@@ -21,21 +21,16 @@ body {
   align-items: center;
 }
 
-#reset {
-  padding-top: 32.5px;
-}
-
 div.page-title {
-  font-size: 5rem;
-  letter-spacing: 1px;
+  font-size: 3rem;
   margin: 2rem 0px 1rem 0px;
   text-transform: none;
   font-weight: 600;
   cursor: pointer;
 
-  background-color: #000000;
+  background-color: #66CCFF;
   color: transparent;
-  text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+  text-shadow: 0px 2px 3px rgba(0,0,0,0.25);
   -webkit-background-clip: text;
      -moz-background-clip: text;
           background-clip: text;
@@ -47,6 +42,7 @@ div.page-subtitle {
   cursor: pointer;
   text-align: center;
   margin-bottom: 2rem;
+  color: #66CCFF;
 }
 
 div.white-box {
@@ -54,7 +50,6 @@ div.white-box {
   margin-bottom: 2rem;
   border-radius: 0.33rem;
   border: 1px solid #DDDDDD;
-  border-left: 0.5rem solid #663399;
   border-bottom: 0.33rem solid #DDDDDD;
   background-color: #FFFFFF;
 }
@@ -64,7 +59,7 @@ div.footer {
   text-align: center;
   font-size: 1.25rem;
   font-weight: 600;
-  color: #888888;
+  color: #66CCFF;
 }
 
 div.footer a, div.footer a:hover {
@@ -83,6 +78,43 @@ div.white-box p {
   margin-bottom: 1.5rem;
 }
 
+div.mw-tiers {
+  overflow: hidden; 
+  position: relative; 
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+div.mw-tiers div.mw-tier {
+  text-align: center;
+  border: 1px solid #DDDDDD;
+  border-top: 0.33rem solid #DDDDDD;
+  cursor: pointer;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 1.5rem 0.5rem;
+  margin-bottom: 2rem;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: calc(25% - 30px);
+  float: left;
+  position: relative;
+  top: 4px;
+
+  transition: top ease-out 200ms;
+}
+
+div.mw-tiers div.mw-tier span {
+  display: block;
+  font-size: 0.875rem;
+  color: #888888;
+}
+
+div.mw-tiers div.mw-tier:hover {
+  border-top: 0.33rem solid #66CCFF;
+  top: 0px;
+}
+
 div.craftable-items {
   overflow: hidden;
   position: relative;
@@ -93,7 +125,7 @@ div.craftable-items {
 div.craftable-items div.craftable-item {
   text-align: center;
   border: 1px solid #DDDDDD;
-  border-bottom: 0.33rem solid #DDDDDD;
+  border-top: 0.33rem solid #DDDDDD;
   cursor: pointer;
   font-size: 1.125rem;
   font-weight: 600;
@@ -111,14 +143,14 @@ div.craftable-items div.craftable-item {
 }
 
 div.craftable-items div.craftable-item:hover {
-  border-bottom: 0.33rem solid #663399;
+  border-top: 0.33rem solid #66CCFF;
   top: 0px;
 }
 
 div.craftable-items div.craftable-item.selected {
   top: 0px;
-  border-bottom: 0.33rem solid #663399;
-  background-color: #663399;
+  border-top: 0.33rem solid #66CCFF;
+  background-color: #66CCFF;
   color: #FFFFFF;
 }
 
@@ -133,9 +165,9 @@ div.craftable-items div.craftable-item.selected:after {
   height: 0px;
   border-left: 10px solid #FFFFFF;
   border-right: 10px solid #FFFFFF;
-  border-top: 10px solid #663399;
+  border-top: 10px solid #66CCFF;
   border-bottom: 0px;
-  bottom: -14px;
+  bottom: -10px;
   left: 50%;
   margin-left: -10px;
 }

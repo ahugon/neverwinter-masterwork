@@ -104,6 +104,9 @@ var skyhold = new Zone("Pirate's Skyhold");
 var brynShander = new Zone("Icewind Dale: Bryn Shander");
 var lonelywood = new Zone("Icewind Dale: Lonelywood");
 var coldRun = new Zone("Icewind Dale: Cold Run");
+var sharMires = new Zone("Sharandar: The Mires");
+var sharGrove = new Zone("Sharandar: The Grove");
+var sharRuins = new Zone("Sharandar: The Ruins");
 
 // declare sources of raw mats
 var gathering = new Origin("Gathering", pe, GOLD);
@@ -116,6 +119,9 @@ var brynShanderMap = new Origin("Untapped Resources", brynShander, MAPS);
 var lonelywoodMap = new Origin("Untapped Resources", lonelywood, MAPS);
 var coldRunMap = new Origin("Untapped Resources", coldRun, MAPS);
 var soshenstarMap = new Origin("Untapped Resources", soshenstar, MAPS);
+var sharMiresMap = new Origin("Untapped Resources", sharMires, MAPS);
+var sharGroveMap = new Origin("Untapped Resources", sharGrove, MAPS);
+var sharRuinsMap = new Origin("Untapped Resources", sharRuins, MAPS);
 var omuMap = new Origin("Untapped Resources", omu, MAPS);
 var atelier = new Origin("Atelier", stronghold, GMS);
 var goldsmith = new Origin("Goldsmith", stronghold, GMS);
@@ -124,6 +130,7 @@ var bloomery = new Origin("Bloomery", stronghold, GMS);
 var tannery = new Origin("Tannery", stronghold, GMS);
 var tong = new Origin("Tomb of the Nine Gods", dungeon, DROP);
 var msp = new Origin("Spellplague Caverns (Master)", dungeon, DROP);
+var vos = new Origin("Vault of Stars", dungeon, DROP);
 var allosaurs = new Origin("Allosaurs", soshenstar, DROP);
 var batiri = new Origin("Batiri", soshenstar, DROP);
 var spiders = new Origin("Spiders", chult, DROP);
@@ -164,6 +171,17 @@ var brilliantPinion = new RawMaterial("Brilliant Pinion", omuMap, 1, RAW);
 var obsidian = new RawMaterial("Obsidian", omuMap, 1, RAW);
 var chultanSpringWater = new RawMaterial("Chultan Spring Water", omuMap, 1, RAW);
 
+// declare raw mats from Sharandar 3k maps
+var weepingwillowstears = new RawMaterial("Weeping Willow's Tears", sharMiresMap, 1, RAW);
+var soulfireflies = new RawMaterial("Soulfire Flies", sharRuinsMap, 1, RAW);
+var silvertonguemoss = new RawMaterial("Silvertongue Moss", sharRuinsMap, 1, RAW);
+var trollsearwaxresin = new RawMaterial("Troll's Earwax Resin", sharRuinsMap, 1, RAW);
+var feywoodlog = new RawMaterial("Feywood Log", sharGroveMap, 1, RAW);
+var dryadhair = new RawMaterial("Dryad Hair", sharGroveMap, 1, RAW);
+var hardenedblightbark = new RawMaterial("Hardened Blight Bark", sharGroveMap, 1, RAW);
+var shadeleaves = new RawMaterial("Shade Leaves", sharMiresMap, 1, RAW);
+var shadowdemonseyes = new RawMaterial("Shadowdemon's Eyes", sharMiresMap, 1, RAW);
+
 // declare raw mats from GM vendors
 var tincal = new RawMaterial("Tincal", atelier, 2000, RAW);
 var alkali = new RawMaterial("Alkali", atelier, 2000, RAW);
@@ -183,6 +201,10 @@ var lionHide = new RawMaterial("Lion Hide", lions, 0, RAW);
 var fartouchedResiduum = new RawMaterial("Fartouched Residuum", msp, 0, RAW);
 var moteOfSoulfire = new RawMaterial("Mote of Soulfire", tong, 0, RAW);
 var lichstone = new RawMaterial("Lichstone", tong, 0, RAW);
+var shatteredsnowflakes = new RawMaterial("Shattered Snowflakes", vos, 0, RAW);
+var displacerbeastswhisker = new RawMaterial("Displacer Beast's Whisker", vos, 0, RAW);
+var shardofdawnslight = new RawMaterial("Shard of Dawn's Light", vos, 0, RAW);
+var corpseflowerthorn = new RawMaterial("Corpse Flower Thorn", vos, 0, RAW);
 
 // crafted mats level 1-70:
 var craftedCharcoal = new CraftedMaterial("Charcoal", alchemy, 4, [
@@ -567,57 +589,65 @@ var lichstoneSash = new CraftedItem("Lichstone Sash", tailoring, [
   ]);
 
 
-var CRAFTABLE_ITEMS = [];
+var CRAFTABLE_ITEMS = { "5": [], "7": [] };
+var  TIERS = [{ name: "MW V", location: "Chult", num: "5" }, 
+            { name: "MW VII", location: "Sharandar", num: "7" }];
 
 function initializePage() {
-  CRAFTABLE_ITEMS = [];
 
-  CRAFTABLE_ITEMS.push(bronzewoodRaidRing.vueObject());
-  CRAFTABLE_ITEMS.push(beadedAssaultRing.vueObject());
-  CRAFTABLE_ITEMS.push(beadedRestorationRing.vueObject());
-  CRAFTABLE_ITEMS.push(lichstoneWardRing.vueObject());
+  CRAFTABLE_ITEMS_V = [];
 
-  CRAFTABLE_ITEMS.push(beadedAmulet.vueObject());
-  CRAFTABLE_ITEMS.push(bronzewoodAmulet.vueObject());
-  CRAFTABLE_ITEMS.push(fangedBeadedAmulet.vueObject());
-  CRAFTABLE_ITEMS.push(lichstoneAmulet.vueObject());
+  CRAFTABLE_ITEMS_V.push(bronzewoodRaidRing.vueObject());
+  CRAFTABLE_ITEMS_V.push(beadedAssaultRing.vueObject());
+  CRAFTABLE_ITEMS_V.push(beadedRestorationRing.vueObject());
+  CRAFTABLE_ITEMS_V.push(lichstoneWardRing.vueObject());
 
-  CRAFTABLE_ITEMS.push(beadedSash.vueObject());
-  CRAFTABLE_ITEMS.push(bronzewoodSash.vueObject());
-  CRAFTABLE_ITEMS.push(fangedSash.vueObject());
-  CRAFTABLE_ITEMS.push(lichstoneSash.vueObject());
+  CRAFTABLE_ITEMS_V.push(beadedAmulet.vueObject());
+  CRAFTABLE_ITEMS_V.push(bronzewoodAmulet.vueObject());
+  CRAFTABLE_ITEMS_V.push(fangedBeadedAmulet.vueObject());
+  CRAFTABLE_ITEMS_V.push(lichstoneAmulet.vueObject());
+
+  CRAFTABLE_ITEMS_V.push(beadedSash.vueObject());
+  CRAFTABLE_ITEMS_V.push(bronzewoodSash.vueObject());
+  CRAFTABLE_ITEMS_V.push(fangedSash.vueObject());
+  CRAFTABLE_ITEMS_V.push(lichstoneSash.vueObject());
 
   // CW
-  CRAFTABLE_ITEMS.push(obsidianMiztonhiyo.vueObject());
-  CRAFTABLE_ITEMS.push(fangedQuiilpia.vueObject());
+  CRAFTABLE_ITEMS_V.push(obsidianMiztonhiyo.vueObject());
+  CRAFTABLE_ITEMS_V.push(fangedQuiilpia.vueObject());
 
   // DC
-  CRAFTABLE_ITEMS.push(featheredTeotlanextli.vueObject());
-  CRAFTABLE_ITEMS.push(featheredIlhuilli.vueObject());
+  CRAFTABLE_ITEMS_V.push(featheredTeotlanextli.vueObject());
+  CRAFTABLE_ITEMS_V.push(featheredIlhuilli.vueObject());
 
   // SW
-  CRAFTABLE_ITEMS.push(obsidianTecpatl.vueObject());
-  CRAFTABLE_ITEMS.push(dinohideTemicamatl.vueObject());
+  CRAFTABLE_ITEMS_V.push(obsidianTecpatl.vueObject());
+  CRAFTABLE_ITEMS_V.push(dinohideTemicamatl.vueObject());
 
   // HR
-  CRAFTABLE_ITEMS.push(bronzewoodTlahuitolli.vueObject());
-  CRAFTABLE_ITEMS.push(obsidianItztopilli.vueObject());
+  CRAFTABLE_ITEMS_V.push(bronzewoodTlahuitolli.vueObject());
+  CRAFTABLE_ITEMS_V.push(obsidianItztopilli.vueObject());
 
   // OP
-  CRAFTABLE_ITEMS.push(bronzewoodQuauhololli.vueObject());
-  CRAFTABLE_ITEMS.push(bronzewoodCuauhchimalli.vueObject());
+  CRAFTABLE_ITEMS_V.push(bronzewoodQuauhololli.vueObject());
+  CRAFTABLE_ITEMS_V.push(bronzewoodCuauhchimalli.vueObject());
 
   // GF
-  CRAFTABLE_ITEMS.push(bronzewoodMacuahuitl.vueObject());
-  CRAFTABLE_ITEMS.push(bronzewoodMahuizzochimalli.vueObject());
+  CRAFTABLE_ITEMS_V.push(bronzewoodMacuahuitl.vueObject());
+  CRAFTABLE_ITEMS_V.push(bronzewoodMahuizzochimalli.vueObject());
 
   // GWF
-  CRAFTABLE_ITEMS.push(bronzewoodHuitzauhqui.vueObject());
-  CRAFTABLE_ITEMS.push(silkMecatica.vueObject());
+  CRAFTABLE_ITEMS_V.push(bronzewoodHuitzauhqui.vueObject());
+  CRAFTABLE_ITEMS_V.push(silkMecatica.vueObject());
 
   // TR
-  CRAFTABLE_ITEMS.push(obsidianOmihuictli.vueObject());
-  CRAFTABLE_ITEMS.push(obsidianItecpayo.vueObject());
+  CRAFTABLE_ITEMS_V.push(obsidianOmihuictli.vueObject());
+  CRAFTABLE_ITEMS_V.push(obsidianItecpayo.vueObject());
+
+  CRAFTABLE_ITEMS_VII = [];
+
+  CRAFTABLE_ITEMS["5"] = CRAFTABLE_ITEMS_V;
+  CRAFTABLE_ITEMS["7"] = CRAFTABLE_ITEMS_VII;
 }
 
 window.onload = function() {
@@ -660,6 +690,21 @@ window.onload = function() {
     template: `
       <div class="craftable-item vert-flex" @click="itemClicked()" :class="getSelectedClass()">
         <div class="craftable-item-name">{{ item.name }}</div>
+      </div>
+    `
+  });
+
+  Vue.component('mw-tier', {
+    props: [ 'tier' ], 
+    methods: {
+      tierClicked: function() {
+        this.$emit('selecttier', this.tier.num);
+        console.log("selecting tier " + this.tier.name);
+      }
+    }, 
+    template: `
+      <div class="mw-tier" @click="tierClicked()">
+        {{ tier.name }}<span>{{ tier.location }}</span>
       </div>
     `
   });
@@ -708,17 +753,29 @@ window.onload = function() {
   var vm = new Vue({
     el: '#item-select-wrap', 
     data: {
-      craftables: CRAFTABLE_ITEMS, 
+      tiers: TIERS, 
+      craftables: [], 
       materials: [], 
       totals: [], 
-      selectedItem: ""
+      selectedItem: "", 
+      selectedTier: "",
     }, 
     mounted: function() {
       // register listener on root to listen for addtototals event (from material component)
       this.$root.$on("addtototals", this.addMaterialToTotals);
     }, 
     methods: {
-      resetPage: function() {
+      resetTier: function() {
+        this.materials = [];
+        this.totals = [];
+        this.selectedItem = "";
+        this.selectedTier = "";
+      }, 
+      selectTier: function(tier) {
+        this.selectedTier = tier;
+        this.craftables = CRAFTABLE_ITEMS[tier];
+      }, 
+      resetItem: function() {
         this.materials = [];
         this.totals = [];
         this.selectedItem = "";
