@@ -190,6 +190,7 @@ var potash = new RawMaterial("Potash", tenterground, 2000, RAW);
 var terebinth = new RawMaterial("Terebinth", atelier, 400, RAW);
 var ironRust = new RawMaterial("Iron Rust", bloomery, 200, RAW);
 var tannersLiquor = new RawMaterial("Tanner's Liquor", tannery, 2000, RAW);
+var saltMarshCrystal = new RawMaterial("Salt-Marsh Crystal", atelier, 2000, RAW);
 
 // declare drops
 var tearOfUbtao = new RawMaterial("Tear of Ubtao", tong, 0, RAW);
