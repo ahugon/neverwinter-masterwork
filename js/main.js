@@ -1,3 +1,5 @@
+
+
 // constructors
 class Profession {
   constructor(name) {
@@ -107,6 +109,7 @@ var coldRun = new Zone("Icewind Dale: Cold Run");
 var sharMires = new Zone("Sharandar: The Mires");
 var sharGrove = new Zone("Sharandar: The Grove");
 var sharRuins = new Zone("Sharandar: The Ruins");
+var newSharandar = new Zone("New Sharandar");
 
 // declare sources of raw mats
 var gathering = new Origin("Gathering", pe, GOLD);
@@ -136,6 +139,7 @@ var batiri = new Origin("Batiri", soshenstar, DROP);
 var spiders = new Origin("Spiders", chult, DROP);
 var dinosaurs = new Origin("Dinosaurs", chult, DROP);
 var lions = new Origin("Lions", chult, DROP);
+var sharMobs = new Origin("New Sharandar Mobs", newSharandar, DROP);
 
 // declare trash mats
 var ironSand = new RawMaterial("Iron Sand", gathering, 0.2, RAW);
@@ -206,6 +210,7 @@ var shatteredsnowflakes = new RawMaterial("Shattered Snowflakes", vos, 0, RAW);
 var displacerbeastswhisker = new RawMaterial("Displacer Beast's Whisker", vos, 0, RAW);
 var shardofdawnslight = new RawMaterial("Shard of Dawn's Light", vos, 0, RAW);
 var corpseflowerthorn = new RawMaterial("Corpse Flower Thorn", vos, 0, RAW);
+var questionablePieceOfLeather = new RawMaterial("Questionable Piece of Leather", sharMobs, 0, RAW);
 
 // crafted mats level 1-70:
 var craftedCharcoal = new CraftedMaterial("Charcoal", alchemy, 4, [
@@ -589,10 +594,211 @@ var lichstoneSash = new CraftedItem("Lichstone Sash", tailoring, [
     { item: juteMacrame, amount: 1 }
   ]);
 
+// Sharandar craftable materials
+var earsNTears = new CraftedMaterial("Ears 'n Tears", alchemy, 3, [
+  { item: weepingwillowstears, amount: 15 }, 
+  { item: terebinth, amount: 5 }
+], CRAFTED);
+var saltyTearsVarnish = new CraftedMaterial("Salty Tears Varnish", alchemy, 3, [
+  { item: earsNTears, amount: 3 }, 
+  { item: weepingwillowstears, amount: 3 }
+], CRAFTED);
+var feywoodLumber = new CraftedMaterial("Feywood Lumber", armorsmithing, 4, [
+  { item: feywoodlog, amount: 12 }, 
+  { item: soulfireflies, amount: 1 }
+], CRAFTED);
+var hardenedFeywood = new CraftedMaterial("Hardened Feywood", armorsmithing, 2, [
+  { item: feywoodLumber, amount: 4 }, 
+  { item: earsNTears, amount: 1 }
+], CRAFTED);
+var livingFeywood = new CraftedMaterial("Living Feywood", artificing, 3, [
+  { item: weepingwillowstears, amount: 1 }, 
+  { item: feywoodLumber, amount: 4 }
+], CRAFTED);
+var dawnsSilverEnamel = new CraftedMaterial("Dawn's Silver Enamel", artificing, 3, [
+  { item: silvertonguemoss, amount: 4 }, 
+  { item: shardofdawnslight, amount: 1 }
+], CRAFTED);
+var frozenDawnsDew = new CraftedMaterial("Frozen Dawn's Dew", blacksmithing, 4, [
+  { item: shardofdawnslight, amount: 4 }, 
+  { item: shatteredsnowflakes, amount: 1 }
+], CRAFTED);
+var silverVines = new CraftedMaterial("Silver Vines", blacksmithing, 3, [
+  { item: silvertonguemoss, amount: 12 }, 
+  { item: shardofdawnslight, amount: 1 }
+], CRAFTED);
+var wovenWhiskers = new CraftedMaterial("Woven Whiskers", tailoring, 2, [
+  { item: displacerbeastswhisker, amount: 15 }, 
+], CRAFTED);
+var beadsOfLight = new CraftedMaterial("Beads of Light", jewelcrafting, 4, [
+  { item: silvertonguemoss, amount: 12 },
+  { item: silverVines, amount: 4 },  
+  { item: shardofdawnslight, amount: 1 }
+], CRAFTED);
+var crystallineOrnament = new CraftedMaterial("Crystalline Ornament", jewelcrafting, 2, [
+  { item: beadsOfLight, amount: 4 }, 
+  { item: shardofdawnslight, amount: 12 }, 
+  { item: wovenWhiskers, amount: 3 }
+], CRAFTED);
+var thornedOrnament = new CraftedMaterial("Thorned Ornament", jewelcrafting, 2, [
+  { item: beadsOfLight, amount: 4 }, 
+  { item: wovenWhiskers, amount: 3 }, 
+  { item: corpseflowerthorn, amount: 6 }
+], CRAFTED);
+var lacqueredLeaves = new CraftedMaterial("Lacquered Leaves", leatherworking, 2, [
+  { item: questionablePieceOfLeather, amount: 12 }, 
+  { item: earsNTears, amount: 1 }, 
+  { item: soulfireflies, amount: 1 }, 
+  { item: dryadhair, amount: 1 }
+], CRAFTED);
+var lacqueredAgedLeather = new CraftedMaterial("Lacquered 'Aged' Leather", leatherworking, 2, [
+  { item: shadowdemonseyes, amount: 12 }, 
+  { item: soulfireflies, amount: 1 }, 
+  { item: earsNTears, amount: 2 }, 
+  { item: questionablePieceOfLeather, amount: 8 }
+], CRAFTED);
+var feyFibers = new CraftedMaterial("Fey Fibers", tailoring, 1, [
+  { item: weepingwillowstears, amount: 6 }, 
+  { item: dryadhair, amount: 12 }
+], CRAFTED);
+var feydFabrics = new CraftedMaterial("Fey'd Fabrics", tailoring, 3, [
+  { item: weepingwillowstears, amount: 6 }, 
+  { item: dryadhair, amount: 12 }
+], CRAFTED);
+var wovenFeyLeaves = new CraftedMaterial("Woven Fey Leaves", tailoring, 2, [
+  { item: feyFibers, amount: 4 }, 
+  { item: soulfireflies, amount: 1 }, 
+  { item: dryadhair, amount: 4 }
+], CRAFTED);
+var earsNTears = new CraftedMaterial("Ears 'n Tears", alchemy, 3, [
+  { item: weepingwillowstears, amount: 15 }, 
+  { item: terebinth, amount: 5 }
+], CRAFTED);
+
+
+// Sharandar weapons
+var feywoodLongbow = new CraftedItem("Feywood Longbow (Ranger)", artificing, [
+    { item: livingFeywood, amount: 3 }, 
+    { item: crystallineOrnament, amount: 2 },
+    { item: silverVines, amount: 2 }, 
+    { item: feyFibers, amount: 2 }, 
+    { item: earsNTears, amount: 1 },  
+  ]);
+var feywoodPactBlade = new CraftedItem("Feywood Pact Blade (Warlock)", artificing, [
+    { item: livingFeywood, amount: 3 }, 
+    { item: wovenWhiskers, amount: 1 },
+    { item: silverVines, amount: 4 }, 
+    { item: crystallineOrnament, amount: 2 }, 
+    { item: earsNTears, amount: 1 },  
+  ]);
+var silverineOrb = new CraftedItem("Silverine Orb (Wizard)", artificing, [
+    { item: livingFeywood, amount: 3 }, 
+    { item: crystallineOrnament, amount: 2 },
+    { item: silverVines, amount: 1 }, 
+    { item: wovenWhiskers, amount: 4 }, 
+    { item: earsNTears, amount: 1 },  
+  ]);
+var silverineSceptor = new CraftedItem("Silverine Sceptor (Cleric)", artificing, [
+    { item: livingFeywood, amount: 3 }, 
+    { item: crystallineOrnament, amount: 2 },
+    { item: silverVines, amount: 1 }, 
+    { item: wovenWhiskers, amount: 4 }, 
+    { item: earsNTears, amount: 1 },  
+  ]);
+var feywoodLute = new CraftedItem("Feywood Lute (Bard)", artificing, [
+    { item: hardenedFeywood, amount: 4 }, 
+    { item: frozenDawnsDew, amount: 3 },
+    { item: thornedOrnament, amount: 2 }, 
+    { item: earsNTears, amount: 1 },  
+  ]);
+var frozenDewIcon = new CraftedItem("Frozen Dew Icon (Cleric)", artificing, [
+    { item: hardenedFeywood, amount: 4 }, 
+    { item: frozenDawnsDew, amount: 3 },
+    { item: thornedOrnament, amount: 2 }, 
+    { item: earsNTears, amount: 1 },  
+  ]);
+var petrifiedGrimoire = new CraftedItem("Petrified Grimoire (Warlock)", artificing, [
+    { item: lacqueredAgedLeather, amount: 4 }, 
+    { item: saltyTearsVarnish, amount: 3 },
+    { item: feyFibers, amount: 2 }, 
+    { item: shadeleaves, amount: 4 },  
+  ]);
+var thornedTalisman = new CraftedItem("Thorned Talisman (Wizard)", artificing, [
+    { item: beadsOfLight, amount: 4 }, 
+    { item: livingFeywood, amount: 3 },
+    { item: thornedOrnament, amount: 2 }, 
+    { item: feyFibers, amount: 1 },  
+  ]);
+var feywoodBroadSlab = new CraftedItem("Feywood Broad Slab (Barbarian)", blacksmithing, [
+    { item: hardenedFeywood, amount: 4 }, 
+    { item: frozenDawnsDew, amount: 3 },
+    { item: lacqueredAgedLeather, amount: 2 }, 
+    { item: displacerbeastswhisker, amount: 3 },  
+    { item: dawnsSilverEnamel, amount: 4 }, 
+  ]);
+var feywoodCarvedBlade = new CraftedItem("Feywood Carved Blade (Fighter)", blacksmithing, [
+    { item: hardenedFeywood, amount: 4 }, 
+    { item: frozenDawnsDew, amount: 3 },
+    { item: lacqueredAgedLeather, amount: 2 }, 
+    { item: displacerbeastswhisker, amount: 3 },  
+    { item: shatteredsnowflakes, amount: 1 }, 
+  ]);
+var feywoodClub = new CraftedItem("Feywood Club (Paladin)", blacksmithing, [
+    { item: hardenedFeywood, amount: 4 }, 
+    { item: frozenDawnsDew, amount: 3 },
+    { item: lacqueredAgedLeather, amount: 2 }, 
+    { item: earsNTears, amount: 3 },  
+    { item: wovenFeyLeaves, amount: 1 },
+  ]);
+var feywoodRapier = new CraftedItem("Feywood Rapier (Bard)", blacksmithing, [
+    { item: hardenedFeywood, amount: 1 }, 
+    { item: frozenDawnsDew, amount: 3 },
+    { item: lacqueredAgedLeather, amount: 2 }, 
+    { item: silverVines, amount: 4 },  
+    { item: crystallineOrnament, amount: 1 },
+  ]);
+var feywoodStiletto = new CraftedItem("Feywood Stiletto (Rogue)", blacksmithing, [
+    { item: hardenedFeywood, amount: 1 }, 
+    { item: frozenDawnsDew, amount: 3 },
+    { item: lacqueredAgedLeather, amount: 2 }, 
+    { item: silverVines, amount: 4 },  
+    { item: crystallineOrnament, amount: 1 },
+  ]);
+var feywoodBlades = new CraftedItem("Feywood Blades (Ranger)", blacksmithing, [
+    { item: frozenDawnsDew, amount: 3 },
+    { item: lacqueredLeaves, amount: 2 }, 
+    { item: hardenedFeywood, amount: 4 },  
+    { item: feywoodLumber, amount: 1 },
+  ]);
+var feywoodDagger = new CraftedItem("Feywood Dagger (Rogue)", blacksmithing, [
+    { item: frozenDawnsDew, amount: 3 },
+    { item: crystallineOrnament, amount: 2 }, 
+    { item: hardenedFeywood, amount: 4 },  
+    { item: displacerbeastswhisker, amount: 1 },
+  ]);
+var feywoodBuckler = new CraftedItem("Feywood Buckler (Fighter)", armorsmithing, [
+    { item: livingFeywood, amount: 3 },
+    { item: crystallineOrnament, amount: 2 }, 
+    { item: silverVines, amount: 4 },  
+    { item: lacqueredLeaves, amount: 1 },
+  ]);
+var feywoodShield = new CraftedItem("Feywood Shield (Paladin)", armorsmithing, [
+    { item: livingFeywood, amount: 3 },
+    { item: lacqueredLeaves, amount: 2 }, 
+    { item: hardenedFeywood, amount: 4 },  
+    { item: lacqueredAgedLeather, amount: 1 },
+  ]);
+var feydLeafSwordKnot = new CraftedItem("Fey'd Leaf Sword Knot' (Barbarian)", tailoring, [
+    { item: beadsOfLight, amount: 4 }, 
+    { item: frozenDawnsDew, amount: 3 },
+    { item: crystallineOrnament, amount: 2 }, 
+    { item: feyFibers, amount: 1 },  
+  ]);
+
 
 var CRAFTABLE_ITEMS = { "5": [], "7": [] };
-var  TIERS = [{ name: "MW V", location: "Chult", num: "5" }, 
-            { name: "MW VII", location: "Sharandar", num: "7" }];
+var  TIERS = [{ name: "Chultan Masterwork", location: "Chult", num: "5" }, 
+            { name: "Masterwork of Sharandar", location: "New Sharandar", num: "7" }];
 
 function initializePage() {
 
@@ -646,6 +852,39 @@ function initializePage() {
   CRAFTABLE_ITEMS_V.push(obsidianItecpayo.vueObject());
 
   CRAFTABLE_ITEMS_VII = [];
+
+  // CW
+  CRAFTABLE_ITEMS_VII.push(silverineOrb.vueObject());
+  CRAFTABLE_ITEMS_VII.push(thornedTalisman.vueObject());
+
+  // DC
+  CRAFTABLE_ITEMS_VII.push(silverineSceptor.vueObject());
+  CRAFTABLE_ITEMS_VII.push(frozenDewIcon.vueObject());
+
+  // SW
+  CRAFTABLE_ITEMS_VII.push(feywoodPactBlade.vueObject());
+  CRAFTABLE_ITEMS_VII.push(petrifiedGrimoire.vueObject());
+
+  // HR
+  CRAFTABLE_ITEMS_VII.push(feywoodBlades.vueObject());
+  CRAFTABLE_ITEMS_VII.push(feywoodLongbow.vueObject());
+
+  // OP
+  CRAFTABLE_ITEMS_VII.push(feywoodClub.vueObject());
+  CRAFTABLE_ITEMS_VII.push(feywoodShield.vueObject());
+
+  // GF
+  CRAFTABLE_ITEMS_VII.push(feywoodCarvedBlade.vueObject());
+  CRAFTABLE_ITEMS_VII.push(feywoodBuckler.vueObject());
+
+  // GWF
+  CRAFTABLE_ITEMS_VII.push(feydLeafSwordKnot.vueObject());
+  CRAFTABLE_ITEMS_VII.push(feywoodBroadSlab.vueObject());
+
+  // TR
+  CRAFTABLE_ITEMS_VII.push(feywoodDagger.vueObject());
+  CRAFTABLE_ITEMS_VII.push(feywoodStiletto.vueObject());
+
 
   CRAFTABLE_ITEMS["5"] = CRAFTABLE_ITEMS_V;
   CRAFTABLE_ITEMS["7"] = CRAFTABLE_ITEMS_VII;

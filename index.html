@@ -8,7 +8,8 @@
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,600' rel='stylesheet' type='text/css'>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue@2"></script>
+
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117099361-1"></script>
@@ -51,7 +52,7 @@
               <div id="reset" v-show="selectedTier != '' || selectedItem != ''">
                 <p>
                   <a class="btn btn-default" @click="resetTier()" v-show="selectedTier != ''">Pick a different MW tier</a> 
-                  <a class="btn btn-default" @click="resetItem()" v-show="selectedItem != ''">Pick a different MW {{ selectedTier }} item...</a> 
+                  <a class="btn btn-default" @click="resetItem()" v-show="selectedItem != ''">Pick a different item...</a> 
                 </p>
               </div>
               <div class="craftable-items">
