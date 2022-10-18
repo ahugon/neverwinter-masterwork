@@ -670,10 +670,6 @@ var wovenFeyLeaves = new CraftedMaterial("Woven Fey Leaves", tailoring, 2, [
   { item: soulfireflies, amount: 1 }, 
   { item: dryadhair, amount: 4 }
 ], CRAFTED);
-var earsNTears = new CraftedMaterial("Ears 'n Tears", alchemy, 3, [
-  { item: weepingwillowstears, amount: 15 }, 
-  { item: terebinth, amount: 5 }
-], CRAFTED);
 
 
 // Sharandar weapons
@@ -1033,6 +1029,10 @@ window.onload = function() {
 
         var item = mat.item;
         var found = false;
+
+        if(typeof item != "undefined" && item.mtype == "crafted") {
+          console.log("found a craftable, " + item.name + " crafted " + mult + " time");
+        }
 
         if(typeof item != "undefined" && item.mtype == 'raw') {
           var itemName = item.name;

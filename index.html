@@ -59,12 +59,12 @@
                 <craftable-item @selectitem="selectItem" @addmaterial="addMaterial" v-for="craftable in craftables" :key="craftable.name" :item="craftable" :selection="selectedItem"></craftable-item>
               </div>
               <div class="alert alert-info" v-show="craftables.length == 0">No items available for MW {{ selectedTier }} at this time.</div>
-              <div id="material-totals" v-show="totals.length > 0">
+              <!--<div id="material-totals" v-show="totals.length > 0">
                 <h1>{{ selectedItem }} total raw materials:</h1>
                 <div class="totals">
                   <total v-for="tot in totals" :key="tot.name" :t="tot"></total>
                 </div>
-              </div>
+              </div>-->
               <div id="material-list" v-show="materials.length > 0">
                 <h1>{{ selectedItem }} recipe visualization:</h1>
                 <div class="row">
